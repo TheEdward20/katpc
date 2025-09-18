@@ -1,38 +1,8 @@
 <div class="container">
   <h2>Gestión de Equipos</h2>
 
-  <!-- Formulario Crear/Editar -->
-  <form (ngSubmit)="guardarEquipo()">
-    <mat-form-field appearance="fill">
-      <mat-label>Modelo</mat-label>
-      <input matInput [(ngModel)]="equipo.modelo" name="modelo" required>
-    </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Número de Serie</mat-label>
-      <input matInput [(ngModel)]="equipo.numserie" name="numserie" required>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Procesador</mat-label>
-      <input matInput [(ngModel)]="equipo.procesador" name="procesador">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>RAM</mat-label>
-      <input matInput [(ngModel)]="equipo.ram" name="ram">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Almacenamiento</mat-label>
-      <input matInput [(ngModel)]="equipo.almacenamiento" name="almacenamiento">
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" type="submit">
-      {{ equipo.id ? 'Actualizar' : 'Crear' }}
-    </button>
-  </form>
-
+  <button mat-raised-button color="primary" (click)="openDialog()">Crear</button>
   <hr>
 
   <!-- Tabla para mostrar los equipos -->

@@ -1,6 +1,21 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
+interface Equipo {
+  id?: number;
+  modelo: string;
+  numserie: string;
+  procesador?: string;
+  ram?: string;
+  almacenamiento?: string;
+  pantalla?: string;
+  graficos?: string;
+  frecuencia?: string;
+  tipo?: string;
+  ssd?: string;
+  frecuenciapulgada?: string;
+  tarjeta?: string;
+}
 @Component({
   selector: 'app-crear-formato-dialog',
   standalone: false,
@@ -8,16 +23,20 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './crear-formato-dialog.css'
 })
 export class CrearFormatoDialog {
-  modelo: string = '';
-  numserie: string = '';
+  equipo: Equipo;
 
-  constructor(public dialogRef: MatDialogRef<CrearFormatoDialog>) {}
+  constructor(
+    public dialogRef: MatDialogRef<CrearFormatoDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: Equipo
+  ) {
+    this.equipo = data ? { ...data } : { modelo: '', numserie: '' };
+  }
 
-  guardar() {
-    this.dialogRef.close({ modelo: this.modelo, numserie: this.numserie });
+  guardarEquipo() {
+    this.dialogRef.close(this.equipo);
   }
 
   cancelar() {
-    this.dialogRef.close();
+    this.dialogRef
   }
 }

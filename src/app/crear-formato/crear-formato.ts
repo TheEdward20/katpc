@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -28,6 +28,7 @@ interface Equipo {
   styleUrls: ['./crear-formato.css'],
 })
 export class CrearFormato {
+  readonly dialog = inject(MatDialog);
   equipo: Equipo = {
     modelo: '',
     numserie: ''
@@ -49,7 +50,27 @@ export class CrearFormato {
       tarjeta: '8GB'
     }
   ];
+  openDialog(equipo?: Equipo): void {
+  const dialogRef = this.dialog.open(CrearFormatoDialog, {
+    width: '500px',
+    height: '500px',
+    data: equipo ? { ...equipo } : null
+  });
 
+  dialogRef.afterClosed().subscribe((resultado: Equipo | undefined) => {
+    if (resultado) {
+      if (resultado.id) {
+        // Actualizar
+        const index = this.equipos.findIndex(e => e.id === resultado.id);
+        if (index !== -1) this.equipos[index] = resultado;
+      } else {
+        // Crear
+        resultado.id = this.equipos.length + 1;
+        this.equipos.push(resultado);
+      }
+    }
+  });
+}
   guardarEquipo() {
     if (this.equipo.id) {
       // Actualizar
@@ -60,7 +81,10 @@ export class CrearFormato {
       this.equipo.id = this.equipos.length + 1;
       this.equipos.push({ ...this.equipo });
     }
-    //this.equipo = {};
+    this.equipo = {
+      modelo: '',
+      numserie: ''
+    };
   }
 
   editarEquipo(e: Equipo) {

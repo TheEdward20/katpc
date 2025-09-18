@@ -1,1 +1,36 @@
-<h2 mat-dialog-title>Crear Nuevo Formato</h2>
+<!-- Formulario Crear/Editar -->
+
+<form (ngSubmit)="guardarEquipo()">
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Modelo</mat-label>
+    <input matInput [(ngModel)]="equipo.modelo" name="modelo">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Número de Serie</mat-label>
+    <input matInput [(ngModel)]="equipo.numserie" name="numserie">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Procesador</mat-label>
+    <input matInput [(ngModel)]="equipo.procesador" name="procesador">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>RAM</mat-label>
+    <input matInput [(ngModel)]="equipo.ram" name="ram">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Almacenamiento</mat-label>
+    <input matInput [(ngModel)]="equipo.almacenamiento" name="almacenamiento">
+  </mat-form-field>
+  <tr>
+
+  <button mat-raised-button color="primary" type="submit">
+    {{ equipo.id ? 'Actualizar' : 'Guardar' }}
+  </button>
+  <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+</form>
