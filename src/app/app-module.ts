@@ -4,13 +4,34 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 
+//material
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { CrearFormato } from './crear-formato/crear-formato';
+import { OrdenServicio } from './orden-servicio/orden-servicio';
+import {MatListModule} from '@angular/material/list';
+
+
+
+//rutas
+
 @NgModule({
   declarations: [
-    App
+    App,
+    CrearFormato,
+    OrdenServicio
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
