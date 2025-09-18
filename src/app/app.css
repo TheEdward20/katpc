@@ -19,20 +19,33 @@ a[mat-button] {
 }
 
 .example-sidenav {
-  background-color: rgb(14, 217, 231); /* fondo negro */
-  color: white;            /* texto blanco por defecto */
+  background-color: rgba(130, 136, 136, 0.151);
+  color: white;
   height: 100%;
   padding: 20px;
+  width: 160px;   /* 👈 aquí ajustas el ancho */
 }
 
 
-/* Opcional: mejora visual al pasar el mouse */
-mat-nav-list a.mat-list-item:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+.mat-nav-list .mat-list-item {
+  color: white !important;         /* texto blanco */
 }
 
-/* Opcional: efecto hover para los ítems del menú */
-.mat-nav-list a.mat-list-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.mat-nav-list .mat-list-item .mat-line {
+  color: white !important;         /* asegura las líneas internas */
 }
+
+.mat-nav-list .mat-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #fff !important;          /* sigue blanco al hover */
+}
+
+mat-icon {
+  color: white;
+}
+::ng-deep .mat-nav-list .mat-list-item {
+  color: white !important;
+}
+
+
 

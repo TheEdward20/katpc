@@ -9,19 +9,31 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { CrearFormato } from './crear-formato/crear-formato';
-import { OrdenServicio } from './orden-servicio/orden-servicio';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+
+
 
 
 
 //rutas
+import { Home } from './home/home';
+import { CrearFormato } from './crear-formato/crear-formato';
+import { OrdenServicio } from './orden-servicio/orden-servicio';
+import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog';
 
 @NgModule({
   declarations: [
     App,
     CrearFormato,
-    OrdenServicio
+    OrdenServicio,
+    Home,
+    CrearFormatoDialog
 
   ],
   imports: [
@@ -31,7 +43,14 @@ import {MatListModule} from '@angular/material/list';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule
+
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Crear Nuevo Formato</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="outline" style="width: 100%; margin-bottom: 10px;">
+    <mat-label>Modelo</mat-label>
+    <input matInput [(ngModel)]="modelo" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>Número de Serie</mat-label>
+    <input matInput [(ngModel)]="numserie" />
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

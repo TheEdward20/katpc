@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+}
+
+mat-card {
+  margin: 20px;
+  padding: 20px;
+}
+
+mat-paginator {
+  margin-top: 10px;
+}
+
+td, th {
+  text-align: center;
+}
