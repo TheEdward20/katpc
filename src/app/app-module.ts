@@ -27,7 +27,6 @@ import { Home } from './home/home';
 import { CrearFormato } from './crear-formato/crear-formato';
 import { OrdenServicio } from './orden-servicio/orden-servicio';
 import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog';
-import { EspecifiDATA } from './especifi-data/especifi-data';
 
 @NgModule({
   declarations: [
@@ -35,8 +34,7 @@ import { EspecifiDATA } from './especifi-data/especifi-data';
     CrearFormato,
     OrdenServicio,
     Home,
-    CrearFormatoDialog,
-    EspecifiDATA
+    CrearFormatoDialog
 
   ],
   imports: [
