@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -49,7 +50,8 @@ import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog'
     MatTableModule,
     MatDialogModule,
     MatFormFieldModule,
-    FormsModule
+    FormsModule,
+    MatInputModule
 
   ],
   providers: [
