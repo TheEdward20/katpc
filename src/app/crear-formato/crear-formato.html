@@ -8,6 +8,10 @@
   <!-- Tabla para mostrar los equipos -->
   <table mat-table [dataSource]="equipos" class="mat-elevation-z8">
 
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let elemento">{{ elemento.id }}</td>
+    </ng-container>
     <ng-container matColumnDef="modelo">
       <th mat-header-cell *matHeaderCellDef>Modelo</th>
       <td mat-cell *matCellDef="let elemento">{{ elemento.modelo }}</td>
@@ -22,11 +26,11 @@
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let elemento">
         <button mat-button color="accent" (click)="editarEquipo(elemento)">Editar</button>
-        <button mat-button color="warn" (click)="eliminarEquipo(elemento.id)">Eliminar</button>
+        <button mat-button color="warning" (click)="eliminarEquipo(elemento.id)">Eliminar</button>
       </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="['modelo', 'numserie', 'acciones']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['modelo', 'numserie', 'acciones']"></tr>
+    <tr mat-header-row *matHeaderRowDef="['id','modelo', 'numserie', 'acciones']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['id','modelo', 'numserie', 'acciones']"></tr>
   </table>
 </div>

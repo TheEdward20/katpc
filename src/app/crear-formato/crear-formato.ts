@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CrearFormatoDialog } from '../crear-formato-dialog/crear-formato-dialog';
+import { Confirmdialog } from '../confirmdialog/confirmdialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 interface Equipo {
   id?: number;
@@ -20,7 +23,6 @@ interface Equipo {
   tarjeta?: string;
 }
 
-
 @Component({
   selector: 'app-crear-formato',
   standalone: false,
@@ -28,6 +30,7 @@ interface Equipo {
   styleUrls: ['./crear-formato.css'],
 })
 export class CrearFormato {
+  constructor(private snackBar: MatSnackBar){ }
   readonly dialog = inject(MatDialog);
   equipo: Equipo = {
     modelo: '',
@@ -51,26 +54,26 @@ export class CrearFormato {
     }
   ];
   openDialog(equipo?: Equipo): void {
-  const dialogRef = this.dialog.open(CrearFormatoDialog, {
-    width: '500px',
-    height: '500px',
-    data: equipo ? { ...equipo } : null
-  });
+    const dialogRef = this.dialog.open(CrearFormatoDialog, {
+      width: '700px',
+      height: '700px',
+      data: equipo ? { ...equipo } : null
+    });
 
-  dialogRef.afterClosed().subscribe((resultado: Equipo | undefined) => {
-    if (resultado) {
-      if (resultado.id) {
-        // Actualizar
-        const index = this.equipos.findIndex(e => e.id === resultado.id);
-        if (index !== -1) this.equipos[index] = resultado;
-      } else {
-        // Crear
-        resultado.id = this.equipos.length + 1;
-        this.equipos.push(resultado);
+    dialogRef.afterClosed().subscribe((resultado: Equipo | undefined) => {
+      if (resultado) {
+        if (resultado.id) {
+          // Actualizar
+          const index = this.equipos.findIndex(e => e.id === resultado.id);
+          if (index !== -1) this.equipos[index] = resultado;
+        } else {
+          // Crear
+          resultado.id = this.equipos.length + 1;
+          this.equipos.push(resultado);
+        }
       }
-    }
-  });
-}
+    });
+  }
   guardarEquipo() {
     if (this.equipo.id) {
       // Actualizar
@@ -88,12 +91,20 @@ export class CrearFormato {
   }
 
   editarEquipo(e: Equipo) {
-    this.equipo = { ...e };
+    this.openDialog(e);
+
   }
 
   eliminarEquipo(id: number) {
-    this.equipos = this.equipos.filter(e => e.id !== id);
+    const dialogRef = this.dialog.open(Confirmdialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.equipos = this.equipos.filter(e => e.id !== id);
+        this.snackBar.open('Equipo eliminado exitosamente.', 'Cerrar', {
+          duration: 3000
+        });
+      }
+    });
   }
-
 }
-
