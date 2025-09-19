@@ -1,10 +1,11 @@
-import { AfterViewInit, Component, inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { CrearFormatoDialog } from '../crear-formato-dialog/crear-formato-dialog';
 import { Confirmdialog } from '../confirmdialog/confirmdialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 
 
 interface Equipo {
@@ -29,30 +30,19 @@ interface Equipo {
   templateUrl: './crear-formato.html',
   styleUrls: ['./crear-formato.css'],
 })
-export class CrearFormato {
+export class CrearFormato implements OnInit{
   constructor(private snackBar: MatSnackBar){ }
   readonly dialog = inject(MatDialog);
+
+  http = inject(HttpClient);
   equipo: Equipo = {
     modelo: '',
     numserie: ''
   };
-  equipos: Equipo[] = [
-    {
-      id: 1,
-      modelo: 'Accer Nitro V15',
-      numserie: 'NHQRYAA001409033E07600',
-      procesador: 'Intel Core i7-13620H',
-      ram: '16GB',
-      almacenamiento: '512GB',
-      pantalla: '15.6',
-      graficos: 'NVIDIA RTX 4060',
-      frecuencia: '4.90GHz',
-      tipo: 'DDR5',
-      ssd: 'SSD NVMe',
-      frecuenciapulgada: 'FHD 90+Hz',
-      tarjeta: '8GB'
-    }
-  ];
+  equipolist: any[] = [];
+  ngOnInit(): void {
+    this.getData();
+  }
   openDialog(equipo?: Equipo): void {
     const dialogRef = this.dialog.open(CrearFormatoDialog, {
       width: '700px',
@@ -64,12 +54,12 @@ export class CrearFormato {
       if (resultado) {
         if (resultado.id) {
           // Actualizar
-          const index = this.equipos.findIndex(e => e.id === resultado.id);
-          if (index !== -1) this.equipos[index] = resultado;
+          const index = this.equipolist.findIndex(e => e.id === resultado.id);
+          if (index !== -1) this.equipolist[index] = resultado;
         } else {
           // Crear
-          resultado.id = this.equipos.length + 1;
-          this.equipos.push(resultado);
+          resultado.id = this.equipolist.length + 1;
+          this.equipolist.push(resultado);
         }
       }
     });
@@ -77,12 +67,12 @@ export class CrearFormato {
   guardarEquipo() {
     if (this.equipo.id) {
       // Actualizar
-      const index = this.equipos.findIndex(e => e.id === this.equipo.id);
-      if (index !== -1) this.equipos[index] = { ...this.equipo };
+      const index = this.equipolist.findIndex(e => e.id === this.equipo.id);
+      if (index !== -1) this.equipolist[index] = { ...this.equipo };
     } else {
       // Crear
-      this.equipo.id = this.equipos.length + 1;
-      this.equipos.push({ ...this.equipo });
+      this.equipo.id = this.equipolist.length + 1;
+      this.equipolist.push({ ...this.equipo });
     }
     this.equipo = {
       modelo: '',
@@ -100,11 +90,19 @@ export class CrearFormato {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.equipos = this.equipos.filter(e => e.id !== id);
+        this.equipolist = this.equipolist.filter(e => e.id !== id);
         this.snackBar.open('Equipo eliminado exitosamente.', 'Cerrar', {
           duration: 3000
         });
       }
     });
   }
+  getData() {
+    this.http.get('https://localhost:7066/api/especificacionMaster').subscribe((res: any)=>{
+      this.equipolist = res;
+    })
+  }
+
+
+
 }

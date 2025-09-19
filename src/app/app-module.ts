@@ -28,6 +28,7 @@ import { CrearFormato } from './crear-formato/crear-formato';
 import { OrdenServicio } from './orden-servicio/orden-servicio';
 import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog';
 import { Confirmdialog } from './confirmdialog/confirmdialog';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { Confirmdialog } from './confirmdialog/confirmdialog';
     MatDialogModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule
 
   ],
   providers: [
