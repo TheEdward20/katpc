@@ -13,6 +13,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CrearFormatoDialog {
   form: FormGroup;
+  formCondicion: FormGroup;
+  formInterpretacion: FormGroup;
+  formPcMark: FormGroup;
   loading = false; // <--- nueva variable
   constructor(
     private fb: FormBuilder,
@@ -36,6 +39,21 @@ export class CrearFormatoDialog {
       graficos: [data?.graficos],
       tipograficos: [data?.tipograficos],
     });
+    this.formPcMark = this.fb.group({
+      puntajeGeneral: [''],
+      cpuScore: [''],
+      gpuScore: [''],
+    });
+
+    this.formCondicion = this.fb.group({
+      estadoGeneral: [''],
+      observaciones: [''],
+    });
+
+    this.formInterpretacion = this.fb.group({
+      conclusion: [''],
+      recomendaciones: [''],
+    });
   }
 
   guardarEquipo() {
@@ -46,7 +64,7 @@ export class CrearFormatoDialog {
         modelo: this.form.value.modelo || '',
         numserie: this.form.value.numserie || '',
         procesador: this.form.value.procesador || '',
-        frecueProc: this.form.value.frecueproc || this.form.value.frecueProc , // <-- aquí
+        frecueProc: this.form.value.frecueproc || this.form.value.frecueProc, // <-- aquí
         ram: this.form.value.ram || '',
         tiporam: this.form.value.tiporam || '',
         almacenamiento: this.form.value.almacenamiento || '',
@@ -93,10 +111,8 @@ export class CrearFormatoDialog {
   }
 
   siguiente() {
-  // Aquí puedes controlar lo que hará "Siguiente"
-  // Ejemplo: cambiar a otra pestaña, abrir otro dialog, avanzar en pasos, etc.
-  console.log("Pasar al siguiente paso", this.form.value);
-}
+    
+  }
 
   cancelar() {
     this.dialogRef.close();

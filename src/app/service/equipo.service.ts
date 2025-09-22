@@ -7,7 +7,7 @@ import { Equipo } from "../model/equipo.model";
 @Injectable({  providedIn: 'root'
 })
 export class EquipoService {
- private apiUrl = 'https://localhost:7066/api/KatPCDataMaster'; // tu endpoint
+ private apiUrl = 'https://localhost:7066/api/KatPCDatosMaster'; // tu endpoint
 
  constructor(private http: HttpClient) {}
 

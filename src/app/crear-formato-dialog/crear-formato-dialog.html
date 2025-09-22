@@ -1,66 +1,145 @@
 <h1 mat-dialog-title>{{ data.idEquipo === 0 ? 'Nuevo Equipo' : 'Editar Equipo' }}</h1>
-<div mat-dialog-content>
-  <form [formGroup]="form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Modelo</mat-label>
-      <input matInput formControlName="modelo">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Número de Serie</mat-label>
-      <input matInput formControlName="numserie">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Procesador</mat-label>
-      <input matInput formControlName="procesador">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Frecuencia del Procesador</mat-label>
-      <input matInput formControlName="frecueProc">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Memoria RAM</mat-label>
-      <input matInput formControlName="ram">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Tipo de Memoria Ram</mat-label>
-      <input matInput formControlName="tiporam">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Almacenamiento</mat-label>
-      <input matInput formControlName="almacenamiento">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Tipo de Almacenamiento</mat-label>
-      <input matInput formControlName="tipoalmacen">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Pantalla de pulgadas</mat-label>
-      <input matInput formControlName="pantalla">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Frecuencia de Pantalla</mat-label>
-      <input matInput formControlName="frecuepantalla">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Gráficos</mat-label>
-      <input matInput formControlName="graficos">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Tipo de Gráficos</mat-label>
-      <input matInput formControlName="tipograficos">
-    </mat-form-field>
-  </form>
-</div>
 
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="cancelar()">Cancelar</button>
-  <button mat-raised-button color="accent" (click)="siguiente()" [disabled]="form.invalid">
-    Siguiente
-  </button>
-  <button mat-raised-button color="primary" (click)="guardarEquipo()" [disabled]="form.invalid">
-    <!-- Spinner modal -->
-    <div class="overlay" *ngIf="loading">
-      <mat-spinner diameter="80" color="accent"></mat-spinner>
-    </div>
-    {{ data.idEquipo === 0 ? 'Guardar' : 'Actualizar' }}
-  </button>
+<mat-dialog-content>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    
+    <!-- Paso 1: Datos del Equipo -->
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Datos del Equipo</ng-template>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Modelo</mat-label>
+          <input matInput formControlName="modelo" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Número de Serie</mat-label>
+          <input matInput formControlName="numserie" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Procesador</mat-label>
+          <input matInput formControlName="procesador" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Frecuencia del Procesador</mat-label>
+          <input matInput formControlName="frecueProc" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Memoria RAM</mat-label>
+          <input matInput formControlName="ram" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Tipo de Memoria Ram</mat-label>
+          <input matInput formControlName="tiporam" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Almacenamiento</mat-label>
+          <input matInput formControlName="almacenamiento" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Tipo de Almacenamiento</mat-label>
+          <input matInput formControlName="tipoalmacen" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Pantalla de pulgadas</mat-label>
+          <input matInput formControlName="pantalla" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Frecuencia de Pantalla</mat-label>
+          <input matInput formControlName="frecuepantalla" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Gráficos</mat-label>
+          <input matInput formControlName="graficos" />
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Tipo de Gráficos</mat-label>
+          <input matInput formControlName="tipograficos" />
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperNext>Siguiente</button>
+          <button mat-button (click)="cancelar()">Cancelar</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Paso 2: PC-Mark -->
+    <mat-step [stepControl]="formPcMark">
+      <form [formGroup]="formPcMark">
+        <ng-template matStepLabel>Resultados PC-Mark</ng-template>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Puntaje General</mat-label>
+          <input matInput formControlName="puntajeGeneral" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>CPU Score</mat-label>
+          <input matInput formControlName="cpuScore" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>GPU Score</mat-label>
+          <input matInput formControlName="gpuScore" />
+        </mat-form-field>
+
+        <div>
+           <button mat-button (click)="cancelar()">Cancelar</button>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Paso 3: Condición física del equipo -->
+    <mat-step [stepControl]="formCondicion">
+      <form [formGroup]="formCondicion">
+        <ng-template matStepLabel>Condición Física</ng-template>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Estado General</mat-label>
+          <input matInput formControlName="estadoGeneral" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Observaciones</mat-label>
+          <textarea matInput formControlName="observaciones"></textarea>
+        </mat-form-field>
+
+        <div>
+           <button mat-button (click)="cancelar()">Cancelar</button>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Paso 4: Interpretación -->
+    <mat-step [stepControl]="formInterpretacion">
+      <form [formGroup]="formInterpretacion">
+        <ng-template matStepLabel>Interpretación</ng-template>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Conclusión</mat-label>
+          <textarea matInput formControlName="conclusion"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Recomendaciones</mat-label>
+          <textarea matInput formControlName="recomendaciones"></textarea>
+        </mat-form-field>
+
+        <div>
+           <button mat-button (click)="cancelar()">Cancelar</button>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-raised-button color="primary"
+            (click)="guardarEquipo()"
+            [disabled]="form.invalid || formPcMark.invalid || formCondicion.invalid || formInterpretacion.invalid">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>
