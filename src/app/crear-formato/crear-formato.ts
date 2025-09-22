@@ -103,31 +103,128 @@ export class CrearFormato implements OnInit {
     });
   }
 
-  exportPDF(equipo: Equipo) {
-    const doc = new jsPDF(); // <-- solo una vez
-    doc.setFontSize(18);
-    doc.text(`Ficha del Equipo: ${equipo.modelo}`, 14, 22);
+exportPDF(equipo: Equipo) {
+    const logo = new Image();
+    logo.src = './Logo KatPC 2022.png'; // asegúrate que el archivo exista en src/assets
 
-    const rows = [
-      ['ID', equipo.idEquipo ?? ''],
-      ['Modelo', equipo.modelo ?? ''],
-      ['Número de Serie', equipo.numserie ?? ''],
-      ['Procesador', equipo.procesador ?? ''],
-      ['Frecuencia Procesador', equipo.frecueProc ?? ''],
-      ['RAM', equipo.ram ?? ''],
-      ['Tipo RAM', equipo.tiporam ?? ''],
-      ['Almacenamiento', equipo.almacenamiento ?? ''],
-      ['Tipo Almacenamiento', equipo.tipoalmacen ?? ''],
-      ['Pantalla', equipo.pantalla ?? ''],
-      ['Frecuencia Pantalla', equipo.frecuepantalla ?? ''],
-      ['Gráficos', equipo.graficos ?? ''],
-      ['Tipo Gráficos', equipo.tipograficos ?? ''],
+    const doc = new jsPDF(); // <-- solo una vez
+    // 🔲 Fondo negro detrás del título
+    doc.setFillColor(0, 0, 0); // RGB: negro
+    doc.rect(10, 15, 190, 15, 'F'); // x, y, ancho, alto, "F" = fill
+
+    // 📝 Texto en blanco sobre el fondo
+    doc.setFontSize(18);
+    doc.setTextColor(255, 255, 255); // blanco
+    doc.text('FORMATO DE CONDICIÓN DE EQUIPO', 50, 25); // centrado un poco a la derecha
+
+    // Imagen a la izquierda
+    doc.addImage(logo, 'PNG', 14, 17, 20, 10);
+
+    const rows = [[equipo.modelo ?? '', equipo.numserie ?? '']];
+
+    // ── Primera tabla ──
+    autoTable(doc, {
+      head: [['Modelo', 'Número de serie']],
+      body: rows,
+      startY: 40,
+      styles: {
+        fontSize: 7,
+        cellPadding: 1,
+        halign: 'center',
+      },
+      headStyles: {
+        fontSize: 8,
+        fillColor: [179, 181, 33],
+        textColor: [0, 0, 0],
+        halign: 'center',
+      },
+      columnStyles: {
+        0: { cellWidth: 40 },
+        1: { cellWidth: 50 },
+      },
+      tableWidth: 'wrap',
+    });
+
+    // ── Título centrado de la segunda tabla ──
+    const lastY = (doc as any).lastAutoTable?.finalY || 60;
+    doc.setFontSize(10);
+    doc.setTextColor(0, 0, 0);
+
+    // Dibujar fondo amarillo para el título
+    const pageWidth = 118;
+    const titleText = 'Especificaciones del Equipo';
+    const rectWidth = 90; // ancho del fondo igual a la primera tabla
+    const rectHeight = 8;
+    doc.setFillColor(179, 181, 33);
+    doc.rect((pageWidth - rectWidth) / 2, lastY + 0.5, rectWidth, rectHeight, 'F');
+
+    // Escribir texto centrado sobre el fondo
+    doc.text(titleText, pageWidth / 2, lastY + 5.5, { align: 'center' });
+
+    // ── Segunda tabla igual a la primera ──
+    const specsRows = [
+      ['Procesador', equipo.procesador ?? '', equipo.frecueProc ?? ''],
+      ['Ram', equipo.ram ?? '', equipo.tiporam ?? ''],
+      ['Almacenamiento', equipo.almacenamiento ?? '', equipo.tipoalmacen ?? ''],
+      ['Pantalla', equipo.pantalla ?? '', equipo.frecuepantalla ?? ''],
+      ['Gráficos', equipo.graficos ?? '', equipo.tipograficos ?? ''],
     ];
 
     autoTable(doc, {
-      head: [['Campo', 'Valor']],
-      body: rows,
-      startY: 30,
+      //head: [['', '', '']],
+      body: specsRows,
+      startY: 40 + 18, // deja un espacio entre título y tabla
+      styles: {
+        fontSize: 7,
+        cellPadding: 1,
+        halign: 'center',
+      },
+
+      columnStyles: {
+        0: { cellWidth: 30 }, // misma proporción que la primera tabla
+        1: { cellWidth: 40 },
+        2: { cellWidth: 20 },
+      },
+      tableWidth: 'wrap', // ajusta al contenido como la primera
+    });
+
+    // Dibujar fondo amarillo para el título
+    const pageWidth2 = 118;
+    const titleText2 = 'Resultados PC Mark 10';
+    const rectWidth2 = 90; // ancho del fondo igual a la primera tabla
+    const rectHeight2 = 8;
+    doc.setFillColor(179, 181, 33);
+    doc.rect((pageWidth2 - rectWidth2) / 2, lastY + 32, rectWidth2, rectHeight2, 'F');
+
+    // Escribir texto centrado sobre el fondo
+    doc.text(titleText2, pageWidth2 / 2, lastY + 37, { align: 'center' });
+
+    // ── Tercera tabla igual a la primera ──
+    const specsRows2 = [
+      ['Condición de Batería', '1:25 Horas', '1:25 Horas', '10000'],
+    ];
+    autoTable(doc, {
+      head: [['Condición de Batería', 'Uso de oficina', 'Máxima exigencia', 'Vida Útil']],
+      body: specsRows2,
+      startY: 40 + 50, // deja un espacio entre título y tabla
+      styles: {
+        fontSize: 7,
+        cellPadding: 1,
+        halign: 'center',
+      },
+      headStyles: {
+        fontSize: 8,
+        fillColor: [179, 181, 33],
+        textColor: [0, 0, 0],
+        halign: 'center',
+      },
+      columnStyles: {
+        0: { cellWidth: 26.5 }, // misma proporción que la primera tabla
+        1: { cellWidth: 20 },
+        2: { cellWidth: 18 },
+        3: { cellWidth: 25.5 },
+      },
+      tableWidth: 'wrap', // ajusta al contenido como la primera
     });
 
     // Crear Blob y URL para mostrar
@@ -136,9 +233,5 @@ export class CrearFormato implements OnInit {
 
     // Abrir en nueva ventana
     window.open(pdfUrl, '_blank');
-
-    // Nombre del archivo personalizado
-    const nombreArchivo = `${equipo.numserie}_${equipo.modelo}.pdf`.replace(/\s+/g, '');
-    console.log('Nombre del archivo para descarga:', nombreArchivo);
   }
 }
