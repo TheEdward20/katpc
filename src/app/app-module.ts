@@ -17,6 +17,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -28,7 +31,6 @@ import { CrearFormato } from './crear-formato/crear-formato';
 import { OrdenServicio } from './orden-servicio/orden-servicio';
 import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog';
 import { Confirmdialog } from './confirmdialog/confirmdialog';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,6 @@ import { HttpClientModule } from '@angular/common/http';
     Home,
     CrearFormatoDialog,
     Confirmdialog
-
   ],
   imports: [
     BrowserModule,
@@ -55,7 +56,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [

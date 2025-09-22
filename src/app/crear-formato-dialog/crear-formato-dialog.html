@@ -1,97 +1,63 @@
-<div class="form-container">
-  <!-- Formulario Crear/Editar -->
-  <form fxLayout="columna" (ngSubmit)="guardarEquipo()" fxLayoutAlign="centro centro">
-
-
-    <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td><mat-form-field class="example-full-width">
-            <mat-label>Modelo</mat-label>
-            <input matInput [(ngModel)]="equipo.modelo" name="modelo">
-          </mat-form-field></td>
-        <td><mat-form-field class="example-full-width">
-            <mat-label>Número de Serie</mat-label>
-            <input matInput [(ngModel)]="equipo.numserie" name="numserie">
-          </mat-form-field></td>
-      </tr>
-    </table>
-    <table class="example-full-width" cellSpacing="0">
-      <tr>
-        <td><mat-form-field appearance="fill">
-            <mat-label>Procesador</mat-label>
-            <input matInput [(ngModel)]="equipo.procesador" name="procesador">
-          </mat-form-field></td>
-        <td><mat-form-field appearance="fill">
-            <mat-label>RAM</mat-label>
-            <input matInput [(ngModel)]="equipo.ram" name="ram">
-          </mat-form-field></td>
-      </tr>
-    </table>
-
-    <table class="example-full-width" cellSpacing="0">
-      <tr>
-        <td>
-          <mat-form-field appearance="fill">
-            <mat-label>Almacenamiento</mat-label>
-            <input matInput [(ngModel)]="equipo.almacenamiento" name="almacenamiento">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field appearance="fill">
-            <mat-label>pantalla</mat-label>
-            <input matInput [(ngModel)]="equipo.pantalla" name="pantalla">
-          </mat-form-field>
-        </td>
-      </tr>
-    </table>
-
-    <table class="example-full-width" cellSpacing="0">
-      <td>
-        <mat-form-field appearance="fill">
-          <mat-label>graficos</mat-label>
-          <input matInput [(ngModel)]="equipo.graficos" name="graficos">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field appearance="fill">
-          <mat-label>frecuencia</mat-label>
-          <input matInput [(ngModel)]="equipo.frecuencia" name="frecuencia">
-        </mat-form-field>
-      </td>
-    </table>
-
-    <table class="example-full-width" cellSpacing="0">
-      <td>
-        <mat-form-field appearance="fill">
-          <mat-label>tipo</mat-label>
-          <input matInput [(ngModel)]="equipo.tipo" name="tipo">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field appearance="fill">
-          <mat-label>ssd</mat-label>
-          <input matInput [(ngModel)]="equipo.ssd" name="ssd">
-        </mat-form-field>
-      </td>
-    </table>
-
-    <table class="example-full-width" cellSpacing="0">
-      <td>
-        <mat-form-field appearance="fill">
-          <mat-label>frecuenciapulgada</mat-label>
-          <input matInput [(ngModel)]="equipo.frecuenciapulgada" name="frecuenciapulgada">
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field appearance="fill">
-          <mat-label>tarjeta</mat-label>
-          <input matInput [(ngModel)]="equipo.tarjeta" name="tarjeta">
-        </mat-form-field>
-      </td>
-    </table>
-      <button mat-raised-button color="primary" type="submit">
-        {{ equipo.id ? 'Actualizar' : 'Guardar' }}
-      </button>
-      <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+<h1 mat-dialog-title>{{ data.idEquipo === 0 ? 'Nuevo Equipo' : 'Editar Equipo' }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Modelo</mat-label>
+      <input matInput formControlName="modelo">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Número de Serie</mat-label>
+      <input matInput formControlName="numserie">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Procesador</mat-label>
+      <input matInput formControlName="procesador">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Frecuencia del Procesador</mat-label>
+      <input matInput formControlName="frecueProc">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Memoria RAM</mat-label>
+      <input matInput formControlName="ram">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Tipo de Memoria Ram</mat-label>
+      <input matInput formControlName="tiporam">  
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Almacenamiento</mat-label>
+      <input matInput formControlName="almacenamiento">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Tipo de Almacenamiento</mat-label>
+      <input matInput formControlName="tipoalmacen">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Pantalla de pulgadas</mat-label>
+      <input matInput formControlName="pantalla">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Frecuencia de Pantalla</mat-label>
+      <input matInput formControlName="frecuepantalla">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Gráficos</mat-label>
+      <input matInput formControlName="graficos">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Tipo de Gráficos</mat-label>
+      <input matInput formControlName="tipograficos">
+    </mat-form-field>
   </form>
 </div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardarEquipo()" [disabled]="form.invalid">
+    <!-- Spinner modal -->
+<div class="overlay" *ngIf="loading">
+  <mat-spinner diameter="80" color="accent"></mat-spinner>
+</div>
+    {{ data.idEquipo === 0 ? 'Guardar' : 'Actualizar' }}
+  </button>
