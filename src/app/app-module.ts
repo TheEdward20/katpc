@@ -31,6 +31,7 @@ import { CrearFormato } from './crear-formato/crear-formato';
 import { OrdenServicio } from './orden-servicio/orden-servicio';
 import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog';
 import { Confirmdialog } from './confirmdialog/confirmdialog';
+import { PcMarck } from './pc-marck/pc-marck';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { Confirmdialog } from './confirmdialog/confirmdialog';
     OrdenServicio,
     Home,
     CrearFormatoDialog,
-    Confirmdialog
+    Confirmdialog,
+    PcMarck
   ],
   imports: [
     BrowserModule,

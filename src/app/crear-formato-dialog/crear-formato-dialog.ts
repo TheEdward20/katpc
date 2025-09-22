@@ -92,6 +92,12 @@ export class CrearFormatoDialog {
     }
   }
 
+  siguiente() {
+  // Aquí puedes controlar lo que hará "Siguiente"
+  // Ejemplo: cambiar a otra pestaña, abrir otro dialog, avanzar en pasos, etc.
+  console.log("Pasar al siguiente paso", this.form.value);
+}
+
   cancelar() {
     this.dialogRef.close();
   }
