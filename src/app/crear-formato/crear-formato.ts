@@ -20,7 +20,6 @@ import autoTable from 'jspdf-autotable';
 export class CrearFormato implements OnInit {
   constructor(private snackBar: MatSnackBar, private equipoService: EquipoService) {}
   readonly dialog = inject(MatDialog);
-
   http = inject(HttpClient);
   equipolist: Equipo[] = [];
   ngOnInit(): void {
@@ -28,8 +27,8 @@ export class CrearFormato implements OnInit {
   }
   openDialog(equipo?: Equipo): void {
     const dialogRef = this.dialog.open(CrearFormatoDialog, {
-      width: '700px',
-      height: '700px',
+      width: '1900px',
+      height: '600px',
 
       data: equipo
         ? { ...equipo } // si viene equipo => editar
@@ -76,7 +75,6 @@ export class CrearFormato implements OnInit {
         mensaje: '¿Seguro que deseas eliminar este equipo?',
       },
     });
-
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.equipoService.deleteEquipo(id).subscribe({
@@ -103,7 +101,7 @@ export class CrearFormato implements OnInit {
     });
   }
 
-exportPDF(equipo: Equipo) {
+  exportPDF(equipo: Equipo) {
     const logo = new Image();
     logo.src = './Logo KatPC 2022.png'; // asegúrate que el archivo exista en src/assets
 
@@ -200,9 +198,7 @@ exportPDF(equipo: Equipo) {
     doc.text(titleText2, pageWidth2 / 2, lastY + 37, { align: 'center' });
 
     // ── Tercera tabla igual a la primera ──
-    const specsRows2 = [
-      ['Condición de Batería', '1:25 Horas', '1:25 Horas', '10000'],
-    ];
+    const specsRows2 = [['', equipo.usooficina?? '', equipo.maximaexigencia?? '', (equipo.vidautil ?? '') + '%']];
     autoTable(doc, {
       head: [['Condición de Batería', 'Uso de oficina', 'Máxima exigencia', 'Vida Útil']],
       body: specsRows2,
@@ -226,7 +222,30 @@ exportPDF(equipo: Equipo) {
       },
       tableWidth: 'wrap', // ajusta al contenido como la primera
     });
-
+    // ── Tercera tabla igual a la primera ──
+    const specsRows3 = [['Escenciales', 'Arranque de Programas', equipo.arranque?? ''],
+  ['','Videoconferencias', equipo.videoconfe?? '']
+    ];
+    autoTable(doc, {
+     // head: [['','', '']],
+      body: specsRows3,
+      startY: 40 + 63, // deja un espacio entre título y tabla
+      styles: {
+        fontSize: 7,
+        cellPadding: 1,
+        halign: 'center',
+      },
+      headStyles: {
+        fontSize: 8,
+        halign: 'center',
+      },
+      columnStyles: {
+        0: { cellWidth: 26.5}, // misma proporción que la primera tabla
+        1: { cellWidth: 38 },
+        2: { cellWidth: 25.5 },
+      },
+      tableWidth: 'wrap', // ajusta al contenido como la primera
+    });
     // Crear Blob y URL para mostrar
     const pdfBlob = doc.output('blob');
     const pdfUrl = URL.createObjectURL(pdfBlob);

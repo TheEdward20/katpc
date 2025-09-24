@@ -13,8 +13,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CrearFormatoDialog {
   form: FormGroup;
-  formInterpretacion: FormGroup;
-  loading = false; // <--- nueva variable
+  loading = false;
+
   constructor(
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CrearFormatoDialog>,
@@ -64,17 +64,15 @@ export class CrearFormatoDialog {
       pantallatactil: [data?.pantallatactil],
       webcam: [data?.webcam],
       pantallad: [data?.pantallad],
-      botones: [data?.pantallad]
-      
-    });
-
-    this.formInterpretacion = this.fb.group({
+      botones: [data?.pantallad],
       grado: [data?.grado],
       condicionfisica: [data?.condicionfisica],
       interpretacion: [data?.interpretacion],
       encargado: [data?.encargado],
       fechaprueba: [data?.fechaprueba]
+      
     });
+
   }
 
  
@@ -83,6 +81,7 @@ export class CrearFormatoDialog {
     if (this.form.valid) {
       this.loading = true; // <-- comienza loading
       const equipoActualizado: Equipo = {
+        // DATOS
         idEquipo: this.form.value.idEquipo,
         modelo: this.form.value.modelo || '',
         numserie: this.form.value.numserie || '',
@@ -96,20 +95,56 @@ export class CrearFormatoDialog {
         frecuepantalla: this.form.value.frecuepantalla || '',
         graficos: this.form.value.graficos || '',
         tipograficos: this.form.value.tipograficos || '',
-       
+      
+        // PC MARCK
+        usooficina: this.form.value.usooficina || '',
+        maximaexigencia: this.form.value.maximaexigencia || '',
+        vidautil: this.form.value.vidautil || '',
+        arranque: this.form.value.arranque || '',
+        videoconfe: this.form.value.videoconfe || '',
+        navegacion: this.form.value.navegacion || '',
+        excelprograma: this.form.value.excelprograma || '',
+        escrituradocum: this.form.value.escrituradocum || '',
+        edicionfotoscad: this.form.value.edicionfotoscad || '',
+        edicionvideo: this.form.value.edicionvideo || '',
+        videojuego: this.form.value.videojuego || '',
+        tecladoilumi: this.form.value.tecladoilumi,
+        windowshello: this.form.value.windowshello,
+        puertosusb: this.form.value.puertosusb,
+        salidavideo: this.form.value.salidavideo,
+        wifi: this.form.value.wifi,
+        puertotipoc: this.form.value.puertotipoc,
+        microfono: this.form.value.microfono,
+        touchpad: this.form.value.touchpad,
+        bluetooth: this.form.value.bluetooth,
+        cd: this.form.value.cd,
+        puertoauxiliar: this.form.value.puertoauxiliar,
+        bocinas: this.form.value.bocinas,
+        pantallatactil: this.form.value.pantallatactil,
+        webcam: this.form.value.webcam,
+        pantallad: this.form.value.pantallad,
+        botones: this.form.value.botones,
+
+        // INTERPRETACION
+        grado: this.form.value.grado || '',
+        condicionfisica: this.form.value.condicionfisica || '',
+        interpretacion: this.form.value.interpretacion || '',
+        encargado: this.form.value.encargado || '',
+        fechaprueba: this.form.value.fechaprueba || '',
       };
 
       if (equipoActualizado.idEquipo && equipoActualizado.idEquipo > 0) {
         // UPDATE
         this.http
           .put(
-            `https://localhost:7066/api/KatPCDataMaster/${equipoActualizado.idEquipo}`,
+            `https://localhost:7066/api/KatPCDatosMaster/${equipoActualizado.idEquipo}`,
             { ...equipoActualizado, idEquipo: equipoActualizado.idEquipo } // forzar que coincida
           )
           .subscribe({
             next: (response) => {
               //console.log('Equipo actualizado:', response);
               //console.log('PUT payload:', equipoActualizado);
+              this.loading = true;
               window.location.reload();
               this.dialogRef.close(this.form.value);
             },
@@ -120,11 +155,17 @@ export class CrearFormatoDialog {
           });
       } else {
         // CREATE
-        this.http.post('https://localhost:7066/api/KatPCDataMaster', equipoActualizado).subscribe({
+        this.http.post('https://localhost:7066/api/KatPCDatosMaster', equipoActualizado).subscribe({
           next: (response) => {
-            console.log('Equipo guardado:', response);
-            window.location.reload();
+            this.loading = true;
+            console.log('POST payload:', equipoActualizado);
+
+            // 👉 LIMPIAR FORMULARIOS
+            this.form.reset();
+
             this.dialogRef.close(this.form.value);
+
+            window.location.reload();
           },
           error: (error) => {
             console.error('Error al guardar el equipo:', error);
@@ -139,6 +180,8 @@ export class CrearFormatoDialog {
   }
 
   cancelar() {
-    this.dialogRef.close();
+    this.loading = true;
+    this.form.reset();
+  this.dialogRef.close();
   }
 }

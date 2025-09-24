@@ -5,8 +5,11 @@
 
     <!-- Paso 1: Datos del Equipo -->
     <mat-step [stepControl]="form">
+
       <form [formGroup]="form">
+
         <ng-template matStepLabel>Datos del Equipo</ng-template>
+
         <div class="form-grid">
           <mat-form-field class="example-full-width">
             <mat-label>Modelo</mat-label>
@@ -57,8 +60,6 @@
             <input matInput formControlName="tipograficos" />
           </mat-form-field>
         </div>
-
-
         <div>
           <button mat-button (click)="cancelar()">Cancelar</button>
           <button mat-button matStepperNext>Siguiente</button>
@@ -68,7 +69,9 @@
 
     <!-- Paso 2: PC-Mark -->
     <mat-step [stepControl]="form">
+
       <form [formGroup]="form">
+
         <ng-template matStepLabel>Resultados PC-Mark</ng-template>
         <!-- Condición de Batería -->
         <h3>Condición de Batería</h3>
@@ -93,7 +96,7 @@
             ? '#fff3cd'
             : '#d4edda'
       }" />
-            <!--<span matSuffix>%</span>-->
+            <span matSuffix>%</span>
           </mat-form-field>
         </div>
 
@@ -102,7 +105,7 @@
         <div class="form-grid">
           <mat-form-field class="input-small">
             <mat-label>Arranque de Programas</mat-label>
-            <input matInput type="number" formControlName="arranque" [ngStyle]="{
+            <input matInput type="text" formControlName="arranque" [ngStyle]="{
         'background-color':
           form.value.arranque <= 999
             ? '#ffcccc'
@@ -114,7 +117,7 @@
 
           <mat-form-field class="input-small">
             <mat-label>Videoconferencias</mat-label>
-            <input matInput type="number" formControlName="videoconfe" [ngStyle]="{
+            <input matInput type="text" formControlName="videoconfe" [ngStyle]="{
         'background-color':
           form.value.videoconfe <= 999
             ? '#ffcccc'
@@ -126,7 +129,7 @@
 
           <mat-form-field class="input-small">
             <mat-label>Navegación por Internet</mat-label>
-            <input matInput type="number" formControlName="navegacion" [ngStyle]="{
+            <input matInput type="text" formControlName="navegacion" [ngStyle]="{
         'background-color':
           form.value.navegacion <= 999
             ? '#ffcccc'
@@ -142,7 +145,7 @@
         <div class="form-grid">
           <mat-form-field class="input-small">
             <mat-label>Excel y Programación</mat-label>
-            <input matInput type="number" formControlName="excelprograma" [ngStyle]="{
+            <input matInput type="text" formControlName="excelprograma" [ngStyle]="{
         'background-color':
           form.value.excelprograma <= 999
             ? '#ffcccc'
@@ -153,7 +156,7 @@
           </mat-form-field>
           <mat-form-field class="input-small">
             <mat-label>Escritura de Documentos</mat-label>
-            <input matInput type="number" formControlName="escrituradocum" [ngStyle]="{
+            <input matInput type="text" formControlName="escrituradocum" [ngStyle]="{
         'background-color':
           form.value.escrituradocum <= 999
             ? '#ffcccc'
@@ -169,7 +172,7 @@
         <div class="form-grid">
           <mat-form-field class="input-small">
             <mat-label>Edición de Fotos y CAD</mat-label>
-            <input matInput type="number" formControlName="edicionfotoscad" [ngStyle]="{
+            <input matInput type="text" formControlName="edicionfotoscad" [ngStyle]="{
         'background-color':
           form.value.edicionfotoscad <= 999
             ? '#ffcccc'
@@ -180,7 +183,7 @@
           </mat-form-field>
           <mat-form-field class="input-small">
             <mat-label>Edición de Video</mat-label>
-            <input matInput type="number" formControlName="edicionvideo" [ngStyle]="{
+            <input matInput type="text" formControlName="edicionvideo" [ngStyle]="{
         'background-color':
           form.value.edicionvideo <= 999
             ? '#ffcccc'
@@ -196,7 +199,7 @@
         <div class="form-grid">
           <mat-form-field class="input-small">
             <mat-label>Videojuegos y Renderizado</mat-label>
-            <input matInput type="number" formControlName="videojuego" [ngStyle]="{
+            <input matInput type="text" formControlName="videojuego" [ngStyle]="{
         'background-color':
           form.value.videojuego <= 999
             ? '#ffcccc'
@@ -271,10 +274,9 @@
       </form>
     </mat-step>
 
-
     <!-- Paso 4: Interpretación -->
-    <mat-step [stepControl]="formInterpretacion">
-      <form [formGroup]="formInterpretacion">
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
         <ng-template matStepLabel>Interpretación</ng-template>
         <div class="form-grid">
           <mat-form-field class="example-full-width">
@@ -301,15 +303,15 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-
-
         <div>
           <button mat-button (click)="cancelar()">Cancelar</button>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-raised-button color="primary" (click)="guardarEquipo()"
-          [disabled]="form.invalid || formInterpretacion.invalid">
-          Guardar
-        </button>
+          <button mat-raised-button color="primary" (click)="guardarEquipo()" [disabled]="form.invalid">
+            <div class="overlay" *ngIf="loading">
+              <mat-spinner diameter="80" color="accent"></mat-spinner>
+            </div>
+            Guardar
+          </button>
         </div>
       </form>
     </mat-step>
