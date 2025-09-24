@@ -12,5 +12,37 @@ export interface Equipo {
   frecuepantalla?: string;
   graficos?: string;
   tipograficos?: string;
+  usooficina?: string;
+  maximaexigencia?: string;
+  vidautil?: string;
+  arranque?: string;
+  videoconfe?: string;
+  navegacion?: string;
+  excelprograma?: string;
+  escrituradocum?: string;
+  edicionfotoscad?: string;
+  edicionvideo?: string;
+  videojuego?: string;
+  tecladoilumi?: string;
+  windowshello?: string;
+  puertosusb?: string;
+  salidavideo?: string;
+  wifi?: string;
+  puertotipoc?: string;
+  microfono?: string;
+  touchpad?: string;
+  bluetooth?: string;
+  cd?: string;
+  puertoauxiliar?: string;
+  bocinas?: string;
+  pantallatactil?: string;
+  webcam?: string;
+  pantallad?: string;
+  botones?: string;
+  grado?: string;
+  condicionfisica?: string;
+  interpretacion?: string;
+  encargado?: string;
+  fechaprueba?: string;
 
 }

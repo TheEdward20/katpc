@@ -1,5 +1,6 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -21,7 +22,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -61,12 +64,16 @@ import { PcMarck } from './pc-marck/pc-marck';
     HttpClientModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    { provide: MAT_DATE_LOCALE, useValue: 'es-MX' } // <-- para dd/MM/yyyy
   ],
   bootstrap: [App]
 })

@@ -13,9 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CrearFormatoDialog {
   form: FormGroup;
-  formCondicion: FormGroup;
   formInterpretacion: FormGroup;
-  formPcMark: FormGroup;
   loading = false; // <--- nueva variable
   constructor(
     private fb: FormBuilder,
@@ -23,7 +21,9 @@ export class CrearFormatoDialog {
     @Inject(MAT_DIALOG_DATA) public data: Equipo,
     private http: HttpClient // <-- inyecta HttpClient
   ) {
-    console.log('Datos recibidos en el dialog:', data);
+
+    
+    //console.log('Datos recibidos en el dialog:', data);
     this.form = this.fb.group({
       idEquipo: [data?.idEquipo],
       modelo: [data?.modelo],
@@ -38,23 +38,46 @@ export class CrearFormatoDialog {
       frecuepantalla: [data?.frecuepantalla],
       graficos: [data?.graficos],
       tipograficos: [data?.tipograficos],
-    });
-    this.formPcMark = this.fb.group({
-      puntajeGeneral: [''],
-      cpuScore: [''],
-      gpuScore: [''],
-    });
-
-    this.formCondicion = this.fb.group({
-      estadoGeneral: [''],
-      observaciones: [''],
+      usooficina: [data?.usooficina],
+      maximaexigencia: [data?.maximaexigencia],
+      vidautil: [data?.vidautil],
+      arranque: [data?.arranque],
+      videoconfe: [data?.videoconfe],
+      navegacion: [data?.navegacion],
+      excelprograma: [data?.excelprograma],
+      escrituradocum: [data?.escrituradocum],
+      edicionfotoscad: [data?.edicionfotoscad],
+      edicionvideo: [data?.edicionvideo],
+      videojuego: [data?.videojuego],
+      tecladoilumi: [data?.tecladoilumi],
+      windowshello: [data?.windowshello],
+      puertosusb: [data?.puertosusb],
+      salidavideo: [data?.salidavideo],
+      wifi: [data?.wifi],
+      puertotipoc: [data?.puertotipoc],
+      microfono: [data?.microfono],
+      touchpad: [data?.touchpad],
+      bluetooth: [data?.bluetooth],
+      cd: [data?.cd],
+      puertoauxiliar: [data?.puertoauxiliar],
+      bocinas: [data?.bocinas],
+      pantallatactil: [data?.pantallatactil],
+      webcam: [data?.webcam],
+      pantallad: [data?.pantallad],
+      botones: [data?.pantallad]
+      
     });
 
     this.formInterpretacion = this.fb.group({
-      conclusion: [''],
-      recomendaciones: [''],
+      grado: [data?.grado],
+      condicionfisica: [data?.condicionfisica],
+      interpretacion: [data?.interpretacion],
+      encargado: [data?.encargado],
+      fechaprueba: [data?.fechaprueba]
     });
   }
+
+ 
 
   guardarEquipo() {
     if (this.form.valid) {
@@ -73,6 +96,7 @@ export class CrearFormatoDialog {
         frecuepantalla: this.form.value.frecuepantalla || '',
         graficos: this.form.value.graficos || '',
         tipograficos: this.form.value.tipograficos || '',
+       
       };
 
       if (equipoActualizado.idEquipo && equipoActualizado.idEquipo > 0) {

@@ -2,142 +2,314 @@
 
 <mat-dialog-content>
   <mat-horizontal-stepper [linear]="true" #stepper>
-    
+
     <!-- Paso 1: Datos del Equipo -->
     <mat-step [stepControl]="form">
       <form [formGroup]="form">
         <ng-template matStepLabel>Datos del Equipo</ng-template>
+        <div class="form-grid">
+          <mat-form-field class="example-full-width">
+            <mat-label>Modelo</mat-label>
+            <input matInput formControlName="modelo" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Número de Serie</mat-label>
+            <input matInput formControlName="numserie" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Procesador</mat-label>
+            <input matInput formControlName="procesador" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Frecuencia del Procesador</mat-label>
+            <input matInput formControlName="frecueProc" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Memoria RAM</mat-label>
+            <input matInput formControlName="ram" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Tipo de Memoria Ram</mat-label>
+            <input matInput formControlName="tiporam" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Almacenamiento</mat-label>
+            <input matInput formControlName="almacenamiento" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Tipo de Almacenamiento</mat-label>
+            <input matInput formControlName="tipoalmacen" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Pantalla de pulgadas</mat-label>
+            <input matInput formControlName="pantalla" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Frecuencia de Pantalla</mat-label>
+            <input matInput formControlName="frecuepantalla" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Gráficos</mat-label>
+            <input matInput formControlName="graficos" />
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Tipo de Gráficos</mat-label>
+            <input matInput formControlName="tipograficos" />
+          </mat-form-field>
+        </div>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Modelo</mat-label>
-          <input matInput formControlName="modelo" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Número de Serie</mat-label>
-          <input matInput formControlName="numserie" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Procesador</mat-label>
-          <input matInput formControlName="procesador" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Frecuencia del Procesador</mat-label>
-          <input matInput formControlName="frecueProc" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Memoria RAM</mat-label>
-          <input matInput formControlName="ram" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Tipo de Memoria Ram</mat-label>
-          <input matInput formControlName="tiporam" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Almacenamiento</mat-label>
-          <input matInput formControlName="almacenamiento" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Tipo de Almacenamiento</mat-label>
-          <input matInput formControlName="tipoalmacen" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Pantalla de pulgadas</mat-label>
-          <input matInput formControlName="pantalla" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Frecuencia de Pantalla</mat-label>
-          <input matInput formControlName="frecuepantalla" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Gráficos</mat-label>
-          <input matInput formControlName="graficos" />
-        </mat-form-field>
-        <mat-form-field class="example-full-width">
-          <mat-label>Tipo de Gráficos</mat-label>
-          <input matInput formControlName="tipograficos" />
-        </mat-form-field>
 
         <div>
+          <button mat-button (click)="cancelar()">Cancelar</button>
+          <button mat-button matStepperNext>Siguiente</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <!-- Paso 2: PC-Mark -->
+    <mat-step [stepControl]="form">
+      <form [formGroup]="form">
+        <ng-template matStepLabel>Resultados PC-Mark</ng-template>
+        <!-- Condición de Batería -->
+        <h3>Condición de Batería</h3>
+        <div class="form-grid">
+          <mat-form-field>
+            <mat-label>Uso de oficina (horas)</mat-label>
+            <input matInput type="text" formControlName="usooficina" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Máxima exigencia (horas)</mat-label>
+            <input matInput type="text" formControlName="maximaexigencia" />
+          </mat-form-field>
+
+          <mat-form-field class="input-small">
+            <mat-label>Vida Útil</mat-label>
+            <input matInput type="text" formControlName="vidautil" min="0" max="100" step="1" [ngStyle]="{
+        'background-color':
+          form.value.vidautil <= 20
+            ? '#ffcccc'
+            : form.value.vidautil <= 50
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+            <!--<span matSuffix>%</span>-->
+          </mat-form-field>
+        </div>
+
+        <!-- Escenciales -->
+        <h3>Escenciales</h3>
+        <div class="form-grid">
+          <mat-form-field class="input-small">
+            <mat-label>Arranque de Programas</mat-label>
+            <input matInput type="number" formControlName="arranque" [ngStyle]="{
+        'background-color':
+          form.value.arranque <= 999
+            ? '#ffcccc'
+            : form.value.arranque <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+
+          <mat-form-field class="input-small">
+            <mat-label>Videoconferencias</mat-label>
+            <input matInput type="number" formControlName="videoconfe" [ngStyle]="{
+        'background-color':
+          form.value.videoconfe <= 999
+            ? '#ffcccc'
+            : form.value.videoconfe <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+
+          <mat-form-field class="input-small">
+            <mat-label>Navegación por Internet</mat-label>
+            <input matInput type="number" formControlName="navegacion" [ngStyle]="{
+        'background-color':
+          form.value.navegacion <= 999
+            ? '#ffcccc'
+            : form.value.navegacion <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+        </div>
+
+        <!--Productividad-->
+        <h3>Productividad</h3>
+        <div class="form-grid">
+          <mat-form-field class="input-small">
+            <mat-label>Excel y Programación</mat-label>
+            <input matInput type="number" formControlName="excelprograma" [ngStyle]="{
+        'background-color':
+          form.value.excelprograma <= 999
+            ? '#ffcccc'
+            : form.value.excelprograma <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+          <mat-form-field class="input-small">
+            <mat-label>Escritura de Documentos</mat-label>
+            <input matInput type="number" formControlName="escrituradocum" [ngStyle]="{
+        'background-color':
+          form.value.escrituradocum <= 999
+            ? '#ffcccc'
+            : form.value.escrituradocum <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+        </div>
+
+        <!--Edición de Contenido Digital-->
+        <h3>Edición de Contenido Digital</h3>
+        <div class="form-grid">
+          <mat-form-field class="input-small">
+            <mat-label>Edición de Fotos y CAD</mat-label>
+            <input matInput type="number" formControlName="edicionfotoscad" [ngStyle]="{
+        'background-color':
+          form.value.edicionfotoscad <= 999
+            ? '#ffcccc'
+            : form.value.edicionfotoscad <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+          <mat-form-field class="input-small">
+            <mat-label>Edición de Video</mat-label>
+            <input matInput type="number" formControlName="edicionvideo" [ngStyle]="{
+        'background-color':
+          form.value.edicionvideo <= 999
+            ? '#ffcccc'
+            : form.value.edicionvideo <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+        </div>
+
+        <!--Gaming y Render-->
+        <h3>Gaming y Render</h3>
+        <div class="form-grid">
+          <mat-form-field class="input-small">
+            <mat-label>Videojuegos y Renderizado</mat-label>
+            <input matInput type="number" formControlName="videojuego" [ngStyle]="{
+        'background-color':
+          form.value.videojuego <= 999
+            ? '#ffcccc'
+            : form.value.videojuego <= 5999
+            ? '#fff3cd'
+            : '#d4edda'
+      }" />
+          </mat-form-field>
+        </div>
+
+        <!--Observaciones-->
+        <div class="form-grid">
+          <mat-checkbox [checked]="form.value.tecladoilumi"
+            (change)="form.patchValue({ tecladoilumi: $event.checked })">
+            Teclado Iluminado
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.windowshello"
+            (change)="form.patchValue({ windowshello: $event.checked })">
+            Windows Hello
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.puertosusb" (change)="form.patchValue({ puertosusb: $event.checked })">
+            Puertos USB
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.salidavideo" (change)="form.patchValue({ salidavideo: $event.checked })">
+            Salida de Video
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.wifi" (change)="form.patchValue({ wifi: $event.checked })">
+            WiFi
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.puertotipoc" (change)="form.patchValue({ puertotipoc: $event.checked })">
+            Puerto Tipo C
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.microfono" (change)="form.patchValue({ microfono: $event.checked })">
+            Microfono
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.touchpad" (change)="form.patchValue({ touchpad: $event.checked })">
+            Touchpad
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.bluetooth" (change)="form.patchValue({ bluetooth: $event.checked })">
+            Bluetooth
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.cd" (change)="form.patchValue({ cd: $event.checked })">
+            CD/DVD
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.puertoauxiliar"
+            (change)="form.patchValue({ puertoauxiliar: $event.checked })">
+            Puerto Auxiliar
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.bocinas" (change)="form.patchValue({ bocinas: $event.checked })">
+            Bocinas
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.pantallatactil"
+            (change)="form.patchValue({ pantallatactil: $event.checked })">
+            Pantalla Tactil
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.webcam" (change)="form.patchValue({ webcam: $event.checked })">
+            Webcam
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.pantallad" (change)="form.patchValue({ pantallad: $event.checked })">
+            Pantalla
+          </mat-checkbox>
+          <mat-checkbox [checked]="form.value.botones" (change)="form.patchValue({ botones: $event.checked })">
+            Botones
+          </mat-checkbox>
+        </div>
+
+        <div>
+          <button mat-button matStepperPrevious>Atrás</button>
           <button mat-button matStepperNext>Siguiente</button>
           <button mat-button (click)="cancelar()">Cancelar</button>
         </div>
       </form>
     </mat-step>
 
-    <!-- Paso 2: PC-Mark -->
-    <mat-step [stepControl]="formPcMark">
-      <form [formGroup]="formPcMark">
-        <ng-template matStepLabel>Resultados PC-Mark</ng-template>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Puntaje General</mat-label>
-          <input matInput formControlName="puntajeGeneral" />
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>CPU Score</mat-label>
-          <input matInput formControlName="cpuScore" />
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>GPU Score</mat-label>
-          <input matInput formControlName="gpuScore" />
-        </mat-form-field>
-
-        <div>
-           <button mat-button (click)="cancelar()">Cancelar</button>
-          <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext>Siguiente</button>
-        </div>
-      </form>
-    </mat-step>
-
-    <!-- Paso 3: Condición física del equipo -->
-    <mat-step [stepControl]="formCondicion">
-      <form [formGroup]="formCondicion">
-        <ng-template matStepLabel>Condición Física</ng-template>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Estado General</mat-label>
-          <input matInput formControlName="estadoGeneral" />
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <mat-label>Observaciones</mat-label>
-          <textarea matInput formControlName="observaciones"></textarea>
-        </mat-form-field>
-
-        <div>
-           <button mat-button (click)="cancelar()">Cancelar</button>
-          <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext>Siguiente</button>
-        </div>
-      </form>
-    </mat-step>
 
     <!-- Paso 4: Interpretación -->
     <mat-step [stepControl]="formInterpretacion">
       <form [formGroup]="formInterpretacion">
         <ng-template matStepLabel>Interpretación</ng-template>
+        <div class="form-grid">
+          <mat-form-field class="example-full-width">
+            <mat-label>Grádo</mat-label>
+            <input matInput formControlName="grado" />
+          </mat-form-field>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Conclusión</mat-label>
-          <textarea matInput formControlName="conclusion"></textarea>
-        </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Condicion fisica del equipo</mat-label>
+            <textarea matInput formControlName="condicionfisica"></textarea>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Interpretación de los Resultados</mat-label>
+            <textarea matInput formControlName="interpretacion"></textarea>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Encargado de pruebas</mat-label>
+            <input matInput formControlName="encargado" />
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Fecha de las pruebas</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaprueba">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
 
-        <mat-form-field class="example-full-width">
-          <mat-label>Recomendaciones</mat-label>
-          <textarea matInput formControlName="recomendaciones"></textarea>
-        </mat-form-field>
 
         <div>
-           <button mat-button (click)="cancelar()">Cancelar</button>
+          <button mat-button (click)="cancelar()">Cancelar</button>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-raised-button color="primary"
-            (click)="guardarEquipo()"
-            [disabled]="form.invalid || formPcMark.invalid || formCondicion.invalid || formInterpretacion.invalid">
-            Guardar
-          </button>
+          <button mat-raised-button color="primary" (click)="guardarEquipo()"
+          [disabled]="form.invalid || formInterpretacion.invalid">
+          Guardar
+        </button>
         </div>
       </form>
     </mat-step>
