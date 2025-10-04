@@ -478,7 +478,7 @@ export class CrearFormato implements OnInit {
         }
       },
     });
-
+ 
     // ── cuarta tabla igual a la primera ──
     const specsRows9 = [['']];
     autoTable(doc, {
@@ -676,6 +676,75 @@ export class CrearFormato implements OnInit {
     const titleText7 = 'Gaming y Render';
     doc.text(titleText7, 55 / 2, lastY + 85.5, { align: 'center' });
     doc.rect(14, lastY + 82.3, 90, 5.1);
+
+    doc.setFontSize(12);
+    doc.text('Especificaciones del equipo:', 10, 20);
+
+    // Función para dibujar casilla con o sin palomita
+    const drawLabelWithCheckbox = (x: number, y: number, label: string, value: string | number) => {
+
+      doc.setFontSize(6);
+
+      // escribimos el texto primero
+      doc.text(label, x, y + 2.3);
+      const textWidth = doc.getTextWidth(label); // ancho del texto
+      const checkX = x + textWidth + 2; // 2 px de separación mínima
+      // Dibuja la casilla en la posición indicada
+      doc.rect(checkX, y, 3, 3); // tamaño 3x3
+
+      // si es 1 dibujamos la palomita
+      if (value == 1 || value === '1') {
+        doc.text('X', checkX + 0.6, y + 2.3);
+      }
+    };
+
+    const baseY = lastY + 88.5;
+
+    //IZQUIERDA
+    drawLabelWithCheckbox(15, baseY, 'Teclado Iluminado:', equipo.tecladoilumi ?? '');
+    doc.rect(14, baseY - 1.2, 26.6, 5);
+    drawLabelWithCheckbox(15, baseY + 5, 'Window Shello:     ', equipo.windowshello ?? '');
+    doc.rect(14, baseY + 4, 26.6, 5);
+    drawLabelWithCheckbox(15, baseY + 10, 'Puertos USB:        ', equipo.puertosusb ?? '');
+    doc.rect(14, baseY + 9, 26.6, 5);
+    drawLabelWithCheckbox(15, baseY + 15, 'Salida de Video:    ', equipo.salidavideo ?? '');
+    doc.rect(14, baseY + 14, 26.6, 5);
+    
+    //CENTRO
+    drawLabelWithCheckbox(42, baseY, 'Wifi:                ', equipo.wifi?? '');
+    doc.rect(40.5, baseY - 1.2, 21, 5);
+    drawLabelWithCheckbox(42, baseY + 5 , 'Puerto Tipo C:', equipo.puertotipoc?? '');
+    doc.rect(40.5, baseY + 4, 21, 5);
+    drawLabelWithCheckbox(42, baseY + 10 , 'Micrófono:      ', equipo.microfono?? '');
+    doc.rect(40.5, baseY + 9, 21, 5);
+    drawLabelWithCheckbox(42, baseY + 15 , 'Touchpad:      ', equipo.touchpad?? '');
+    doc.rect(40.5, baseY + 14, 21, 5);
+    
+    //PRIMERA DERECHA
+    drawLabelWithCheckbox(62, baseY, 'Bluetooth:          ', equipo.bluetooth?? '');
+    doc.rect(61.5, baseY - 1.2, 22, 5);
+    drawLabelWithCheckbox(62, baseY + 5, 'CD/DVD:           ', equipo.cd?? '');
+    doc.rect(61.5, baseY + 4, 22, 5);
+    drawLabelWithCheckbox(62, baseY + 10, 'Puerto Auxiliar: ', equipo.puertoauxiliar?? '');
+    doc.rect(61.5, baseY + 9, 22, 5);
+    drawLabelWithCheckbox(62, baseY + 15, 'Bocinas:            ', equipo.bocinas?? '');
+    doc.rect(61.5, baseY + 14, 22, 5);
+    
+    //SEGUNDA DERECHA
+    drawLabelWithCheckbox(85, baseY, 'Pantala Tactil:', equipo.pantallatactil?? '');
+    doc.rect(83.5, baseY -1.2, 20.5, 5);
+    drawLabelWithCheckbox(85, baseY + 5, 'Webcam:       ', equipo.webcam?? '');
+    doc.rect(83.5, baseY + 4, 20.5, 5);
+    drawLabelWithCheckbox(85, baseY + 10, 'Pantalla:        ', equipo.pantallad?? '');
+    doc.rect(83.5, baseY + 9, 20.5, 5);
+    drawLabelWithCheckbox(85, baseY + 15, 'Botones:        ', equipo.botones?? '');
+    doc.rect(83.5, baseY + 14, 20.5, 5);
+
+
+
+    //--------------------------------- SEGUNDA PARTE---------------------------------------------
+    
+    
     // Crear Blob y URL para mostrar
     const pdfBlob = doc.output('blob');
     const pdfUrl = URL.createObjectURL(pdfBlob);
