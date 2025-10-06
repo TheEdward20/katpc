@@ -478,7 +478,7 @@ export class CrearFormato implements OnInit {
         }
       },
     });
- 
+
     // ── cuarta tabla igual a la primera ──
     const specsRows9 = [['']];
     autoTable(doc, {
@@ -682,7 +682,6 @@ export class CrearFormato implements OnInit {
 
     // Función para dibujar casilla con o sin palomita
     const drawLabelWithCheckbox = (x: number, y: number, label: string, value: string | number) => {
-
       doc.setFontSize(6);
 
       // escribimos el texto primero
@@ -709,42 +708,74 @@ export class CrearFormato implements OnInit {
     doc.rect(14, baseY + 9, 26.6, 5);
     drawLabelWithCheckbox(15, baseY + 15, 'Salida de Video:    ', equipo.salidavideo ?? '');
     doc.rect(14, baseY + 14, 26.6, 5);
-    
+
     //CENTRO
-    drawLabelWithCheckbox(42, baseY, 'Wifi:                ', equipo.wifi?? '');
+    drawLabelWithCheckbox(42, baseY, 'Wifi:                ', equipo.wifi ?? '');
     doc.rect(40.5, baseY - 1.2, 21, 5);
-    drawLabelWithCheckbox(42, baseY + 5 , 'Puerto Tipo C:', equipo.puertotipoc?? '');
+    drawLabelWithCheckbox(42, baseY + 5, 'Puerto Tipo C:', equipo.puertotipoc ?? '');
     doc.rect(40.5, baseY + 4, 21, 5);
-    drawLabelWithCheckbox(42, baseY + 10 , 'Micrófono:      ', equipo.microfono?? '');
+    drawLabelWithCheckbox(42, baseY + 10, 'Micrófono:      ', equipo.microfono ?? '');
     doc.rect(40.5, baseY + 9, 21, 5);
-    drawLabelWithCheckbox(42, baseY + 15 , 'Touchpad:      ', equipo.touchpad?? '');
+    drawLabelWithCheckbox(42, baseY + 15, 'Touchpad:      ', equipo.touchpad ?? '');
     doc.rect(40.5, baseY + 14, 21, 5);
-    
+
     //PRIMERA DERECHA
-    drawLabelWithCheckbox(62, baseY, 'Bluetooth:          ', equipo.bluetooth?? '');
+    drawLabelWithCheckbox(62, baseY, 'Bluetooth:          ', equipo.bluetooth ?? '');
     doc.rect(61.5, baseY - 1.2, 22, 5);
-    drawLabelWithCheckbox(62, baseY + 5, 'CD/DVD:           ', equipo.cd?? '');
+    drawLabelWithCheckbox(62, baseY + 5, 'CD/DVD:           ', equipo.cd ?? '');
     doc.rect(61.5, baseY + 4, 22, 5);
-    drawLabelWithCheckbox(62, baseY + 10, 'Puerto Auxiliar: ', equipo.puertoauxiliar?? '');
+    drawLabelWithCheckbox(62, baseY + 10, 'Puerto Auxiliar: ', equipo.puertoauxiliar ?? '');
     doc.rect(61.5, baseY + 9, 22, 5);
-    drawLabelWithCheckbox(62, baseY + 15, 'Bocinas:            ', equipo.bocinas?? '');
+    drawLabelWithCheckbox(62, baseY + 15, 'Bocinas:            ', equipo.bocinas ?? '');
     doc.rect(61.5, baseY + 14, 22, 5);
-    
+
     //SEGUNDA DERECHA
-    drawLabelWithCheckbox(85, baseY, 'Pantala Tactil:', equipo.pantallatactil?? '');
-    doc.rect(83.5, baseY -1.2, 20.5, 5);
-    drawLabelWithCheckbox(85, baseY + 5, 'Webcam:       ', equipo.webcam?? '');
+    drawLabelWithCheckbox(85, baseY, 'Pantala Tactil:', equipo.pantallatactil ?? '');
+    doc.rect(83.5, baseY - 1.2, 20.5, 5);
+    drawLabelWithCheckbox(85, baseY + 5, 'Webcam:       ', equipo.webcam ?? '');
     doc.rect(83.5, baseY + 4, 20.5, 5);
-    drawLabelWithCheckbox(85, baseY + 10, 'Pantalla:        ', equipo.pantallad?? '');
+    drawLabelWithCheckbox(85, baseY + 10, 'Pantalla:        ', equipo.pantallad ?? '');
     doc.rect(83.5, baseY + 9, 20.5, 5);
-    drawLabelWithCheckbox(85, baseY + 15, 'Botones:        ', equipo.botones?? '');
+    drawLabelWithCheckbox(85, baseY + 15, 'Botones:        ', equipo.botones ?? '');
     doc.rect(83.5, baseY + 14, 20.5, 5);
 
-
-
     //--------------------------------- SEGUNDA PARTE---------------------------------------------
-    
-    
+    doc.setFontSize(11);
+    doc.setFont('helvetica', 'bold');
+
+    const pageWidth8 = 370;
+    const titleText8 = 'Condición física del equipo';
+    const rectWidth8 = 90; // ancho del fondo igual a la primera tabla
+    const rectHeight8 = 5.2;
+
+    doc.setFillColor(179, 181, 33);
+    doc.rect((pageWidth8 - rectWidth8) / 2, 40, rectWidth8, rectHeight8, 'F');
+
+    // Escribir texto centrado sobre el fondo
+    doc.text(titleText8, pageWidth8 / 2, 44, { align: 'center' });
+
+    // ── Segunda tabla igual a la primera ──
+    const specsRows16 = [['Grado']];
+
+    autoTable(doc, {
+      //head: [['', '', '']],
+      body: specsRows16,
+      theme: 'grid',
+      startY: 40 + 18, // deja un espacio entre título y tabla
+      styles: {
+        fontSize: 7,
+        cellPadding: 1,
+        halign: 'center',
+      },
+
+      columnStyles: {
+        0: { cellWidth: 30 }, // misma proporción que la primera tabla
+        1: { cellWidth: 40 },
+        2: { cellWidth: 20 },
+      },
+      tableWidth: 'wrap', // ajusta al contenido como la primera
+    });
+
     // Crear Blob y URL para mostrar
     const pdfBlob = doc.output('blob');
     const pdfUrl = URL.createObjectURL(pdfBlob);
