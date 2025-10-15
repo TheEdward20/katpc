@@ -203,9 +203,9 @@ export class CrearFormato implements OnInit {
     const titleText2 = 'Resultados PC Mark 10';
     const rectWidth2 = 90; // ancho del fondo igual a la primera tabla
     const rectHeight2 = 8;
+
     doc.setFillColor(245, 212, 59);
     doc.rect((pageWidth2 - rectWidth2) / 2, lastY + 32, rectWidth2, rectHeight2, 'F');
-
     // Escribir texto centrado sobre el fondo
     doc.text(titleText2, pageWidth2 / 2, lastY + 37, { align: 'center' });
 
@@ -409,6 +409,10 @@ export class CrearFormato implements OnInit {
         }
       },
     });
+    doc.rect((pageWidth2 - rectWidth2) / 2, lastY + 32, 90, 7);
+    doc.rect((pageWidth2 - rectWidth2) / 2, lastY + 39, 26.5, 14);
+    doc.rect(40.5, lastY + 39, 20, 14);
+    doc.rect(60.5, lastY + 39, 18, 14);
 
     // ── Tercera tabla igual a la primera ──
 
@@ -733,7 +737,8 @@ export class CrearFormato implements OnInit {
     const titleText7 = 'Gaming y Render';
     doc.text(titleText7, 55 / 2, lastY + 85.5, { align: 'center' });
     doc.rect(14, lastY + 82.3, 90, 5.1);
-
+    doc.rect(40.5, lastY + 39, 38, 48.4);
+    doc.rect(78.5, lastY + 39, 25.5, 48.4);
     // Función para dibujar casilla con o sin palomita
     const drawLabelWithCheckbox = (x: number, y: number, label: string, value: string | number) => {
       doc.setFontSize(6);
@@ -842,7 +847,7 @@ export class CrearFormato implements OnInit {
     /*----------------------------------- */
     doc.setFontSize(8);
     const pageWidth9 = doc.internal.pageSize.getWidth(); // ancho de página
-    const textY = 50; // posición vertical inicial
+    const textY = 55; // posición vertical inicial
     const textWidth = pageWidth9 - 195; // márgenes laterales (20px a cada lado)
 
     const text: string = equipo.condicionfisica ?? '';
@@ -895,7 +900,7 @@ export class CrearFormato implements OnInit {
         currentY2 += 5; // espacio entre líneas
       }
 
-      currentY2 += 5; // espacio extra entre párrafos
+      currentY2 += 1; // espacio extra entre párrafos
     }
 
     const formatearFecha = (fechaIso: string | null | undefined): string => {
