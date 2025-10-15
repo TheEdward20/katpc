@@ -30,10 +30,19 @@
           <mat-form-field class="example-full-width">
             <mat-label>Memoria RAM</mat-label>
             <input matInput formControlName="ram" />
+            
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Tipo de Memoria Ram</mat-label>
-            <input matInput formControlName="tiporam" />
+            <mat-select formControlName="tiporam">
+              <mat-option value="DDR3">DDR3</mat-option>
+              <mat-option value="DDR3L">DDR3L</mat-option>
+              <mat-option value="LPDDR3X">LPDDR3X</mat-option>
+              <mat-option value="DDR4">DDR4</mat-option>
+              <mat-option value="LPDDR4X">LPDDR4X</mat-option>
+              <mat-option value="DDR5">DDR5</mat-option>
+              <mat-option value="LPDDR5X">LPDDR5X</mat-option>
+            </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Almacenamiento</mat-label>
@@ -41,7 +50,13 @@
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Tipo de Almacenamiento</mat-label>
-            <input matInput formControlName="tipoalmacen" />
+            <mat-select formControlName="tipoalmacen">
+              <mat-option value="SSD SATA">SSD SATA</mat-option>
+              <mat-option value="SSD NVMe">SSD NVMe</mat-option>
+              <mat-option value="HDD">HDD</mat-option>
+              <mat-option value="EMMC">EMMC</mat-option>
+              <mat-option value="SOLDADO">SOLDADO</mat-option>
+            </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Pantalla de pulgadas</mat-label>
@@ -49,7 +64,15 @@
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Frecuencia de Pantalla</mat-label>
-            <input matInput formControlName="frecuepantalla" />
+            <mat-select formControlName="frecuepantalla">
+              <mat-option value="HD 60 Hz">HD 60 Hz</mat-option>
+              <mat-option value="FHD 60 Hz">FHD 60 Hz</mat-option>
+              <mat-option value="FHD 90+ Hz">FHD 90+ Hz</mat-option>
+              <mat-option value="QHD 60 Hz">QHD 60 Hz</mat-option>
+              <mat-option value="QHD 90+ Hz">QHD 90+ Hz</mat-option>
+              <mat-option value="UHD 60 Hz">UHD 60 Hz</mat-option>
+              <mat-option value="UHD 90+ Hz">UHD 90+ Hz</mat-option>
+            </mat-select>
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Gráficos</mat-label>
@@ -280,14 +303,24 @@
         <ng-template matStepLabel>Interpretación</ng-template>
         <div class="form-grid">
           <mat-form-field class="example-full-width">
-            <mat-label>Grádo</mat-label>
-            <input matInput formControlName="grado" />
+            <mat-label>Grado</mat-label>
+            <mat-select formControlName="grado" (selectionChange)="onGradoChange($event.value)">
+              <mat-option value="">None</mat-option>
+              <mat-option value="A+">A+</mat-option>
+              <mat-option value="A">A</mat-option>
+              <mat-option value="B">B</mat-option>
+              <mat-option value="B-">B-</mat-option>
+              <mat-option value="C">C</mat-option>
+              <mat-option value="N">N</mat-option>
+              <mat-option value="F">F</mat-option>
+            </mat-select>
           </mat-form-field>
 
-          <mat-form-field class="example-full-width">
-            <mat-label>Condicion fisica del equipo</mat-label>
+          <mat-form-field class="example-full-width" *ngIf="form.get('grado')?.value">
+            <mat-label>Condición física del equipo</mat-label>
             <textarea matInput formControlName="condicionfisica"></textarea>
           </mat-form-field>
+
           <mat-form-field class="example-full-width">
             <mat-label>Interpretación de los Resultados</mat-label>
             <textarea matInput formControlName="interpretacion"></textarea>
