@@ -25,6 +25,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -35,6 +37,7 @@ import { OrdenServicio } from './orden-servicio/orden-servicio';
 import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog';
 import { Confirmdialog } from './confirmdialog/confirmdialog';
 import { PcMarck } from './pc-marck/pc-marck';
+
 
 @NgModule({
   declarations: [
@@ -67,7 +70,9 @@ import { PcMarck } from './pc-marck/pc-marck';
     MatStepperModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatOptionModule,
+    MatSelectModule,
 
   ],
   providers: [

@@ -112,15 +112,15 @@ export class CrearFormato implements OnInit {
     });
     // 🔲 Fondo negro detrás del título
     doc.setFillColor(0, 0, 0); // RGB: negro
-    doc.rect(10, 15, 190, 15, 'F'); // x, y, ancho, alto, "F" = fill
+    doc.rect(14, 15, 237, 15, 'F'); // x, y, ancho, alto, "F" = fill
 
     // 📝 Texto en blanco sobre el fondo
     doc.setFontSize(18);
     doc.setTextColor(255, 255, 255); // blanco
-    doc.text('FORMATO DE CONDICIÓN DE EQUIPO', 50, 25); // centrado un poco a la derecha
+    doc.text('FORMATO DE CONDICIÓN DE EQUIPO', 70, 25); // centrado un poco a la derecha
 
     // Imagen a la izquierda
-    doc.addImage(logo, 'PNG', 14, 17, 20, 10);
+    doc.addImage(logo, 'PNG', 45, 17, 20, 10);
 
     const rows = [[equipo.modelo ?? '', equipo.numserie ?? '']];
 
@@ -131,13 +131,16 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40,
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
       },
       headStyles: {
         fontSize: 8,
-        fillColor: [179, 181, 33],
+        fillColor: [245, 212, 59],
         textColor: [0, 0, 0],
         halign: 'center',
       },
@@ -158,7 +161,7 @@ export class CrearFormato implements OnInit {
     const titleText = 'Especificaciones del Equipo';
     const rectWidth = 90; // ancho del fondo igual a la primera tabla
     const rectHeight = 8;
-    doc.setFillColor(179, 181, 33);
+    doc.setFillColor(245, 212, 59);
     doc.rect((pageWidth - rectWidth) / 2, lastY + 0.1, rectWidth, rectHeight, 'F');
 
     // Escribir texto centrado sobre el fondo
@@ -179,6 +182,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 18, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -197,7 +203,7 @@ export class CrearFormato implements OnInit {
     const titleText2 = 'Resultados PC Mark 10';
     const rectWidth2 = 90; // ancho del fondo igual a la primera tabla
     const rectHeight2 = 8;
-    doc.setFillColor(179, 181, 33);
+    doc.setFillColor(245, 212, 59);
     doc.rect((pageWidth2 - rectWidth2) / 2, lastY + 32, rectWidth2, rectHeight2, 'F');
 
     // Escribir texto centrado sobre el fondo
@@ -213,13 +219,16 @@ export class CrearFormato implements OnInit {
       startY: 40 + 50, // deja un espacio entre título y tabla
       theme: 'grid',
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
       },
       headStyles: {
         fontSize: 8,
-        fillColor: [179, 181, 33],
+        fillColor: [245, 212, 59],
         textColor: [0, 0, 0],
         halign: 'center',
       },
@@ -245,6 +254,7 @@ export class CrearFormato implements OnInit {
           }
         }
       },
+      margin: { left: 14 },
     });
     const specsRows14 = [['']];
     autoTable(doc, {
@@ -252,6 +262,9 @@ export class CrearFormato implements OnInit {
       body: specsRows14,
       startY: 40 + 58, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -261,14 +274,22 @@ export class CrearFormato implements OnInit {
         halign: 'center',
       },
       columnStyles: {
-        0: { cellWidth: 26.5, fillColor: [179, 181, 33], minCellHeight: 19 },
+        0: { cellWidth: 26.5, fillColor: [245, 212, 59], minCellHeight: 19 },
       },
       tableWidth: 'wrap', // ajusta al contenido como la primera
     });
 
+    doc.setFontSize(10);
+    const x = 28; // posición X (ajústalo según donde quieras)
+    let y = lastY + 43; // posición inicial Y
+
+    const lines3 = ['Condición', 'de', 'Batería'];
+
+    lines3.forEach((line3, i) => {
+      doc.text(line3, x, y + i * 4, { align: 'center' }); // cada línea a +5px
+    });
+
     doc.setFontSize(5);
-    const titleText3 = 'Condición de Batería';
-    doc.text(titleText3, 55 / 2, lastY + 51, { align: 'center' });
 
     // ── Tercera tabla igual a la primera ──
     const specsRows3 = [['', 'Arranque de Programas', equipo.arranque ?? '']];
@@ -280,6 +301,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 63, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -315,6 +339,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 67.5, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -350,6 +377,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 72, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -388,6 +418,9 @@ export class CrearFormato implements OnInit {
       body: specsRows4,
       startY: 45 + 58, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -414,6 +447,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 76, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -449,6 +485,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 80, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -486,6 +525,9 @@ export class CrearFormato implements OnInit {
       body: specsRows9,
       startY: 45 + 70, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -513,6 +555,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 84, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -549,6 +594,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 88, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -586,6 +634,9 @@ export class CrearFormato implements OnInit {
       body: specsRows12,
       startY: 45 + 79, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -610,6 +661,9 @@ export class CrearFormato implements OnInit {
       theme: 'grid',
       startY: 40 + 92.5, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -644,6 +698,9 @@ export class CrearFormato implements OnInit {
       body: specsRows15,
       startY: 40 + 92.5, // deja un espacio entre título y tabla
       styles: {
+        font: 'helvetica', // fuente
+        fontStyle: 'bold', // negrita
+        textColor: [0, 0, 0], // negro puro
         fontSize: 7,
         cellPadding: 1,
         halign: 'center',
@@ -676,9 +733,6 @@ export class CrearFormato implements OnInit {
     const titleText7 = 'Gaming y Render';
     doc.text(titleText7, 55 / 2, lastY + 85.5, { align: 'center' });
     doc.rect(14, lastY + 82.3, 90, 5.1);
-
-    doc.setFontSize(12);
-    doc.text('Especificaciones del equipo:', 10, 20);
 
     // Función para dibujar casilla con o sin palomita
     const drawLabelWithCheckbox = (x: number, y: number, label: string, value: string | number) => {
@@ -740,41 +794,195 @@ export class CrearFormato implements OnInit {
     doc.rect(83.5, baseY + 14, 20.5, 5);
 
     //--------------------------------- SEGUNDA PARTE---------------------------------------------
-    doc.setFontSize(11);
+    doc.setFontSize(12);
     doc.setFont('helvetica', 'bold');
 
     const pageWidth8 = 370;
     const titleText8 = 'Condición física del equipo';
-    const rectWidth8 = 90; // ancho del fondo igual a la primera tabla
+    const rectWidth8 = 130; // ancho del fondo igual a la primera tabla
     const rectHeight8 = 5.2;
 
-    doc.setFillColor(179, 181, 33);
+    doc.setFillColor(245, 212, 59);
     doc.rect((pageWidth8 - rectWidth8) / 2, 40, rectWidth8, rectHeight8, 'F');
 
     // Escribir texto centrado sobre el fondo
     doc.text(titleText8, pageWidth8 / 2, 44, { align: 'center' });
 
     // ── Segunda tabla igual a la primera ──
-    const specsRows16 = [['Grado']];
+    const rows2 = [[equipo.grado ?? '']];
 
+    // ── Primera tabla ──
     autoTable(doc, {
-      //head: [['', '', '']],
-      body: specsRows16,
-      theme: 'grid',
-      startY: 40 + 18, // deja un espacio entre título y tabla
+      head: [['Grado']],
+      body: rows2,
+      theme: 'plain',
+      startY: 45,
       styles: {
-        fontSize: 7,
+        fontSize: 26,
         cellPadding: 1,
         halign: 'center',
       },
-
+      headStyles: {
+        fontSize: 12,
+        textColor: [0, 0, 0],
+        halign: 'center',
+      },
       columnStyles: {
-        0: { cellWidth: 30 }, // misma proporción que la primera tabla
-        1: { cellWidth: 40 },
-        2: { cellWidth: 20 },
+        0: { cellWidth: 40 },
+        1: { cellWidth: 50 },
+      },
+      tableWidth: 'wrap',
+      margin: { left: 113 },
+    });
+
+    doc.rect(120, lastY - 10, 130, 32);
+    doc.rect(120, lastY - 5, 25, 27); /*<----es de Grado */
+    doc.rect(120, lastY - 5, 130, 27);
+
+    /*----------------------------------- */
+    doc.setFontSize(8);
+    const pageWidth9 = doc.internal.pageSize.getWidth(); // ancho de página
+    const textY = 50; // posición vertical inicial
+    const textWidth = pageWidth9 - 195; // márgenes laterales (20px a cada lado)
+
+    const text: string = equipo.condicionfisica ?? '';
+
+    // 🔹 Divide el texto en varias líneas dentro del ancho permitido
+    const lines: string[] = doc.splitTextToSize(text, textWidth) as string[];
+
+    // 🔹 Calcula el centro horizontal
+    const xCentered = 195;
+
+    let currentY = textY;
+    for (const line of lines) {
+      doc.text(line, xCentered, currentY, { align: 'center' });
+      currentY += 5; // espacio entre líneas
+    }
+
+    doc.setFontSize(12);
+    const pageWidth10 = 370;
+    const titleText10 = 'Interpretación de los Resultados';
+    const rectWidth10 = 130; // ancho del fondo igual a la primera tabla
+    const rectHeight10 = 5.2;
+
+    doc.setFillColor(245, 212, 59);
+    doc.rect((pageWidth10 - rectWidth10) / 2, 80.2, rectWidth10, rectHeight10, 'F');
+
+    doc.rect(120, lastY + 30, 130, 85);
+    // Escribir texto centrado sobre el fondo
+    doc.text(titleText10, pageWidth10 / 2, 84, { align: 'center' });
+    //---------------------------------------------------------------------------------------------------------------------
+    doc.setFontSize(8);
+    const pageWidth11 = doc.internal.pageSize.getWidth(); // ancho de página
+    const textX2 = 122; // posición horizontal del texto
+    let currentY2 = 91; // posición vertical inicial
+
+    const text2: string = equipo.interpretacion ?? '';
+
+    // 🔹 Dividir el texto en párrafos usando el punto y espacio como separador
+    const paragraphs: string[] = text2.split(/\. /);
+
+    for (const para of paragraphs) {
+      // 🔹 Añadir el punto al final de cada párrafo si no lo tiene
+      const paragraphText = para.trim().endsWith('.') ? para.trim() : para.trim() + '.';
+
+      // 🔹 Dividir el párrafo en líneas que entren en el ancho permitido
+      const lines2: string[] = doc.splitTextToSize(paragraphText, pageWidth11 - 153);
+
+      // 🔹 Escribir cada línea
+      for (const line2 of lines2) {
+        doc.text(line2, textX2, currentY2, { align: 'justify' });
+        currentY2 += 5; // espacio entre líneas
+      }
+
+      currentY2 += 5; // espacio extra entre párrafos
+    }
+
+    const formatearFecha = (fechaIso: string | null | undefined): string => {
+      if (!fechaIso) return ''; // si viene nulo o vacío
+      const fecha = new Date(fechaIso);
+      if (isNaN(fecha.getTime())) return ''; // si la fecha no es válida
+
+      const dia = String(fecha.getDate()).padStart(2, '0');
+      const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+      const anio = fecha.getFullYear();
+      return `${dia}/${mes}/${anio}`;
+    };
+
+    // Usar la función antes de la tabla
+    const fechaFormateada = formatearFecha(equipo.fechaprueba);
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    const specsRows16 = [['Encargado de Pruebas: ', equipo.encargado ?? '']];
+    const specsRows17 = [['Fecha de las Pruebas: ', fechaFormateada]];
+    autoTable(doc, {
+      // head: [['','', '']],
+      body: specsRows16,
+      theme: 'grid',
+      startY: 103 + 63, // deja un espacio entre título y tabla
+      styles: {
+        fontSize: 9,
+        cellPadding: 1,
+        textColor: [0, 0, 0],
+        halign: 'center',
+      },
+      headStyles: {
+        fontSize: 8,
+        fillColor: [0, 0, 0],
+        halign: 'center',
+      },
+      columnStyles: {
+        0: { cellWidth: 50 }, // misma proporción que la primera tabla
+        1: { cellWidth: 80 },
       },
       tableWidth: 'wrap', // ajusta al contenido como la primera
+      margin: { left: 120 },
     });
+    autoTable(doc, {
+      // head: [['','', '']],
+      body: specsRows17,
+      theme: 'grid',
+      startY: 109 + 63, // deja un espacio entre título y tabla
+      styles: {
+        fontSize: 9,
+        cellPadding: 1,
+        textColor: [0, 0, 0],
+        halign: 'center',
+      },
+      headStyles: {
+        fontSize: 8,
+        fillColor: [0, 0, 0],
+        halign: 'center',
+      },
+      columnStyles: {
+        0: { cellWidth: 50 }, // misma proporción que la primera tabla
+        1: { cellWidth: 80 },
+      },
+      tableWidth: 'wrap', // ajusta al contenido como la primera
+      margin: { left: 120 },
+    });
+
+    doc.setFontSize(8);
+    const pageWidth18 = doc.internal.pageSize.getWidth(); // ancho de página
+    const textY18 = 195; // posición vertical inicial
+    const textWidth18 = pageWidth18 - 225; // márgenes laterales (20px a cada lado)
+
+    const titleText18: string = '"Acepto las condiciones en las que me fue entregado el equipo"';
+
+    // 🔹 Divide el texto en varias líneas dentro del ancho permitido
+    const lines18: string[] = doc.splitTextToSize(titleText18, textWidth18) as string[];
+
+    // 🔹 Calcula el centro horizontal
+    const xCentered18 = 185;
+
+    let currentY18 = textY18;
+    for (const line18 of lines18) {
+      doc.text(line18, xCentered18, currentY18, { align: 'center' });
+      currentY18 += 5; // espacio entre líneas
+    }
+    doc.setLineWidth(1); // más gruesa
+    doc.setDrawColor(0, 0, 0); // color rojo
+    doc.line(150, 190, 220, 190); // desde (20,100) hasta (190,100)
 
     // Crear Blob y URL para mostrar
     const pdfBlob = doc.output('blob');

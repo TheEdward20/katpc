@@ -2,7 +2,9 @@
   <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <img src="./Logo KatPC 2022.png" alt="Logo" style="height: 60px; margin-right: 10px;">
+  <a routerLink="/home">
+  <img src="./Logo KatPC 2022.png" alt="Logo" style="height: 60px; margin-right: 10px; cursor: pointer;">
+</a>
   <span>{{ title() }}</span>
 </mat-toolbar>
 
