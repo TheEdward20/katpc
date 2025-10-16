@@ -246,7 +246,7 @@ export class CrearFormatoDialog {
         // UPDATE
         this.http
           .put(
-            `https://localhost:7066/api/KatPCDatosMaster/${equipoActualizado.idEquipo}`,
+            `https://www.katpc.somee.com/api/KatPCDatosMaster/${equipoActualizado.idEquipo}`,
             { ...equipoActualizado, idEquipo: equipoActualizado.idEquipo } // forzar que coincida
           )
           .subscribe({
@@ -264,7 +264,7 @@ export class CrearFormatoDialog {
           });
       } else {
         // CREATE
-        this.http.post('https://localhost:7066/api/KatPCDatosMaster', equipoActualizado).subscribe({
+        this.http.post('https://www.katpc.somee.com/api/KatPCDatosMaster', equipoActualizado).subscribe({
           next: (response) => {
             console.log('Equipo creado correctamente:', response);
             this.loading = true;
