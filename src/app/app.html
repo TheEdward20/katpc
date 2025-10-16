@@ -1,24 +1,39 @@
-<mat-toolbar style="background-color: black; color: white;">
-  <button mat-icon-button (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <a routerLink="/home">
-  <img src="./Logo KatPC 2022.png" alt="Logo" style="height: 60px; margin-right: 10px; cursor: pointer;">
-</a>
-  <span>{{ title() }}</span>
-</mat-toolbar>
+<ng-container *ngIf="showToolbar()">
+  <mat-toolbar style="background-color: black; color: white; display: flex; justify-content: space-between; align-items: center;">
+    <div style="display: flex; align-items: center;">
+      <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
 
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <mat-nav-list>
-      <a mat-list-item routerLink="/home" (click)="drawer.close()">🏠Home</a>
-      <a mat-list-item routerLink="/crear-formato" (click)="drawer.close()">📝Formato</a>
-      <a mat-list-item routerLink="/orden-servicio" (click)="drawer.close()">📄Servicio</a>
-    </mat-nav-list>
-  </mat-drawer>
+      <a routerLink="/home">
+        <img src="./Logo KatPC 2022.png" alt="Logo" style="height: 60px; margin-left: 10px; cursor: pointer;">
+      </a>
 
-  <div class="example-sidenav-content">
-    <router-outlet></router-outlet>
-  </div>
-</mat-drawer-container>
+      <span style="margin-left: 10px;">{{ title() }}</span>
+    </div>
 
+    <!-- Botón cerrar sesión al lado derecho -->
+    <button mat-button color="warn" (click)="logout()" style="margin-right: 10px;">
+      Cerrar Sesión
+    </button>
+  </mat-toolbar>
+
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home" (click)="drawer.close()">🏠Home</a>
+        <a mat-list-item routerLink="/crear-formato" (click)="drawer.close()">📝Formato</a>
+        <a mat-list-item routerLink="/orden-servicio" (click)="drawer.close()">📄Servicio</a>
+      </mat-nav-list>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-container>
+</ng-container>
+
+<!-- Si estás en /login, solo mostrar router-outlet -->
+<ng-container *ngIf="!showToolbar()">
+  <router-outlet></router-outlet>
+</ng-container>

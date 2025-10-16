@@ -3,14 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { CrearFormato } from './crear-formato/crear-formato';
 import { OrdenServicio } from './orden-servicio/orden-servicio';
 import { Home } from './home/home';
+import { Login } from './login/login';
+import { AuthGuard } from './auth.guard/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: Home },
-  { path: 'crear-formato', component: CrearFormato },
-  { path: 'orden-servicio', component: OrdenServicio },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  // wildcard (si escriben una ruta rara)
-  { path: '**', redirectTo: '/home' }
+  { path: 'login', component: Login },
+  { path: 'home', component: Home, canActivate: [AuthGuard] },
+  { path: 'crear-formato', component: CrearFormato, canActivate: [AuthGuard] },
+  { path: 'orden-servicio', component: OrdenServicio, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 
 ];
 

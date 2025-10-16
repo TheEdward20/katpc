@@ -1,0 +1,35 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #6a11cb, #2575fc); /* degradado bonito */
+}
+
+.login-card {
+  width: 350px;
+  padding: 20px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+  border-radius: 12px;
+  background: white;
+}
+
+/* Estilo del título del card */
+.login-card mat-card-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Campos y botones full-width */
+.login-card .full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Botón */
+.login-card button {
+  height: 45px;
+  font-size: 16px;
+}
