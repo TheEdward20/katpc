@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/katpc",
+            "outputPath": "dist/katpc/server",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
