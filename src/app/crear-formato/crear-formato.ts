@@ -761,7 +761,7 @@ export class CrearFormato implements OnInit {
     //IZQUIERDA
     drawLabelWithCheckbox(15, baseY, 'Teclado Iluminado:', equipo.tecladoilumi ?? '');
     doc.rect(14, baseY - 1.2, 26.6, 5);
-    drawLabelWithCheckbox(15, baseY + 5, 'Window Shello:     ', equipo.windowshello ?? '');
+    drawLabelWithCheckbox(15, baseY + 5, 'Windows Hello:     ', equipo.windowshello ?? '');
     doc.rect(14, baseY + 4, 26.6, 5);
     drawLabelWithCheckbox(15, baseY + 10, 'Puertos USB:        ', equipo.puertosusb ?? '');
     doc.rect(14, baseY + 9, 26.6, 5);

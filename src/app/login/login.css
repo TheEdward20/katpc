@@ -33,3 +33,13 @@
   height: 45px;
   font-size: 16px;
 }
+
+.alerta-roja {
+  color: #fff;
+  background-color: #f44336; /* rojo */
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+}
