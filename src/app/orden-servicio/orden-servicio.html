@@ -1,1 +1,59 @@
-<p>orden-servicio works!</p>
+<div class="container">
+  <h2>ORDEN DE SERVICIO</h2>
+
+
+  <button mat-raised-button color="primary" (click)="openDialog()">Crear</button>
+
+  <div class="toolbar">
+    <mat-form-field appearance="fill">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Modelo, serie, procesador...">
+    </mat-form-field>
+  </div>
+
+  <!-- Tabla para mostrar los equipos -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="idServicio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+      <td mat-cell *matCellDef="let elemento">{{ elemento.idServicio }}</td>
+    </ng-container>
+    <ng-container matColumnDef="folio">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>FOLIO</th>
+      <td mat-cell *matCellDef="let elemento">{{ elemento.folio }}</td>
+    </ng-container>
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>NOMBRE</th>
+      <td mat-cell *matCellDef="let elemento">{{ elemento.nombre }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="telefono">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>TELEFONO</th>
+      <td mat-cell *matCellDef="let elemento">{{ elemento.telefono }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaderecepcion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA</th>
+      <td mat-cell *matCellDef="let elemento">
+        {{ elemento.fechaderecepcion | date:'dd/MM/yyyy' }}
+      </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</th>
+      <td mat-cell *matCellDef="let elemento">
+        <button mat-button color="accent" (click)="editarEquipo(elemento)">Editar</button>
+        <button mat-button color="warning" (click)="eliminarEquipo(elemento.idServicio)">Eliminar</button>
+        <button mat-raised-button color="warning" (click)="exportPDF(elemento)">Exportar a PDF</button>
+
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['idServicio','folio','nombre', 'telefono','fechaderecepcion', 'acciones']">
+    </tr>
+    <tr mat-row
+      *matRowDef="let row; columns: ['idServicio','folio','nombre', 'telefono','fechaderecepcion', 'acciones']"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons> </mat-paginator>
+</div>

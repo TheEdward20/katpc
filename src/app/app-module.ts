@@ -1,10 +1,12 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { NgModule, provideBrowserGlobalErrorListeners, LOCALE_ID } from '@angular/core';
 import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 //material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +29,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 
@@ -36,9 +39,9 @@ import { CrearFormato } from './crear-formato/crear-formato';
 import { OrdenServicio } from './orden-servicio/orden-servicio';
 import { CrearFormatoDialog } from './crear-formato-dialog/crear-formato-dialog';
 import { Confirmdialog } from './confirmdialog/confirmdialog';
-import { PcMarck } from './pc-marck/pc-marck';
 import { Login } from './login/login';
 import { Mensaje } from './mensaje/mensaje';
+import { CrearServicioDialog } from './crear-servicio-dialog/crear-servicio-dialog';
 
 
 @NgModule({
@@ -49,9 +52,9 @@ import { Mensaje } from './mensaje/mensaje';
     Home,
     CrearFormatoDialog,
     Confirmdialog,
-    PcMarck,
     Login,
-    Mensaje
+    Mensaje,
+    CrearServicioDialog
   ],
   imports: [
     BrowserModule,
@@ -77,11 +80,13 @@ import { Mensaje } from './mensaje/mensaje';
     MatNativeDateModule,
     MatOptionModule,
     MatSelectModule,
+    MatChipsModule,
 
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideClientHydration(withEventReplay()),
+    { provide: LOCALE_ID, useValue: 'es-MX' },
     { provide: MAT_DATE_LOCALE, useValue: 'es-MX' } // <-- para dd/MM/yyyy
   ],
   bootstrap: [App]

@@ -14,3 +14,12 @@ mat-paginator {
 td, th {
   text-align: center;
 }
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end; /* empuja el contenido a la derecha */
+  margin-bottom: 5px; /* separa del resto */
+  margin-top: -80px;
+  width: 100%;
+}
+

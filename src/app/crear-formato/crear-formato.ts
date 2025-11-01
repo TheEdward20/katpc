@@ -17,14 +17,20 @@ import autoTable from 'jspdf-autotable';
   templateUrl: './crear-formato.html',
   styleUrls: ['./crear-formato.css'],
 })
-export class CrearFormato implements OnInit {
+export class CrearFormato implements OnInit, AfterViewInit  {
   constructor(private snackBar: MatSnackBar, private equipoService: EquipoService) {}
   readonly dialog = inject(MatDialog);
   http = inject(HttpClient);
   equipolist: Equipo[] = [];
+  dataSource = new MatTableDataSource<Equipo>();
+@ViewChild(MatPaginator) paginator!: MatPaginator;
   ngOnInit(): void {
     this.getData();
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   openDialog(equipo?: Equipo): void {
     const dialogRef = this.dialog.open(CrearFormatoDialog, {
       width: '1900px',
@@ -59,6 +65,7 @@ export class CrearFormato implements OnInit {
           // ✅ CREAR: agrega el nuevo equipo a la lista
           this.equipolist.push(result);
         }
+         this.dataSource.data = [...this.equipolist];
       }
     });
   }
@@ -98,6 +105,7 @@ export class CrearFormato implements OnInit {
   getData() {
     this.equipoService.getEquipos().subscribe((data) => {
       this.equipolist = data;
+      this.dataSource.data = data;
     });
   }
 
@@ -995,5 +1003,14 @@ export class CrearFormato implements OnInit {
 
     // Abrir en nueva ventana
     window.open(pdfUrl, '_blank');
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

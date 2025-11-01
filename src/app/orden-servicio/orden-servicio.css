@@ -1,0 +1,23 @@
+table {
+  width: 100%;
+}
+
+mat-card {
+  margin: 20px;
+  padding: 20px;
+}
+
+mat-paginator {
+  margin-top: 10px;
+}
+
+td, th {
+  text-align: center;
+}
+.toolbar {
+  display: flex;
+  justify-content: flex-end; /* empuja el contenido a la derecha */
+  margin-bottom: 5px; /* separa del resto */
+  margin-top: -80px;
+  width: 100%;
+}
