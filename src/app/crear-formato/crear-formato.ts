@@ -199,9 +199,9 @@ export class CrearFormato implements OnInit, AfterViewInit  {
       },
 
       columnStyles: {
-        0: { cellWidth: 30 }, // misma proporción que la primera tabla
+        0: { cellWidth: 27 }, // misma proporción que la primera tabla
         1: { cellWidth: 40 },
-        2: { cellWidth: 20 },
+        2: { cellWidth: 23 },
       },
       tableWidth: 'wrap', // ajusta al contenido como la primera
     });
