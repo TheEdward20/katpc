@@ -46,6 +46,7 @@ export class CrearServicioDialog {
       pass: [data?.pass],
       descripciondiagnostico: [data?.descripciondiagnostico],
       costo: [data?.costo],
+      estado: [data?.estado]
     });
     // Cada vez que cambie la fecha, la formateamos
     this.form.get('fechaderecepcion')?.valueChanges.subscribe((valor) => {
@@ -96,6 +97,8 @@ export class CrearServicioDialog {
 
         descripciondiagnostico: this.form.value.descripciondiagnostico || '',
         costo: Number(this.form.value.costo) || 0,
+
+        estado: this.form.value.estado ?? '',
       };
 
       if (servicioActualizado.idServicio && servicioActualizado.idServicio > 0) {
@@ -107,7 +110,7 @@ export class CrearServicioDialog {
           )
           .subscribe({
             next: (response) => {
-              console.log('Servicio actualizado:', response);
+              //console.log('Servicio actualizado:', response);
               this.loading = true;
               this.dialogRef.close(servicioActualizado); // ✅ DEVOLVER el servicio completo
             },
@@ -121,7 +124,7 @@ export class CrearServicioDialog {
           .post('https://www.katpc.somee.com/api/KatPCServiciosMaster', servicioActualizado)
           .subscribe({
             next: (response: any) => {
-              console.log('Servicio creado correctamente:', response);
+              //console.log('Servicio creado correctamente:', response);
               this.loading = true;
               // 👇 Si la API devuelve el nuevo idServicio, úsalo
               const nuevoServicio = {

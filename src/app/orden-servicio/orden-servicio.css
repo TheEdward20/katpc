@@ -21,3 +21,23 @@ td, th {
   margin-top: -80px;
   width: 100%;
 }
+
+.estado-proceso {
+  color: green;
+  font-weight: bold;
+}
+
+.estado-espera {
+  color: orange;
+  font-weight: bold;
+}
+
+.estado-finalizado {
+  color: red;
+  font-weight: bold;
+}
+
+table {
+  width: 100%;
+  margin-top: 10px;
+}

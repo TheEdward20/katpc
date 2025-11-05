@@ -251,7 +251,7 @@ export class CrearFormatoDialog {
           )
           .subscribe({
             next: (response) => {
-              console.log('Equipo actualizado:', response);
+              //console.log('Equipo actualizado:', response);
               //console.log('PUT payload:', equipoActualizado);
               this.loading = true;
               window.location.reload();
@@ -266,7 +266,7 @@ export class CrearFormatoDialog {
         // CREATE
         this.http.post('https://www.katpc.somee.com/api/KatPCDatosMaster', equipoActualizado).subscribe({
           next: (response) => {
-            console.log('Equipo creado correctamente:', response);
+            //console.log('Equipo creado correctamente:', response);
             this.loading = true;
             console.log('POST payload:', equipoActualizado);
 

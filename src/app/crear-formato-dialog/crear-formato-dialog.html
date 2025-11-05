@@ -317,15 +317,12 @@
           </mat-form-field>
         </div>
         <div class="form-grid" appearance="fill">
-
           <mat-form-field class="condicion" *ngIf="form.get('grado')?.value">
             <mat-label>Condición física del equipo</mat-label>
             <textarea matInput formControlName="condicionfisica"></textarea>
           </mat-form-field>
-
         </div>
         <div class="form-grid" appearance="fill">
-
           <mat-form-field class="interpretacion">
             <mat-label>Interpretación de los Resultados</mat-label>
             <textarea matInput formControlName="interpretacion"></textarea>
@@ -336,9 +333,6 @@
             <mat-label>Encargado de pruebas</mat-label>
             <input matInput formControlName="encargado" />
           </mat-form-field>
-
-
-
         </div>
         <mat-form-field appearance="fill" class="example-full-width">
           <mat-label>Fecha de las pruebas</mat-label>
@@ -346,7 +340,6 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
-
         <div>
           <button mat-button (click)="cancelar()">Cancelar</button>
           <button mat-button matStepperPrevious>Atrás</button>

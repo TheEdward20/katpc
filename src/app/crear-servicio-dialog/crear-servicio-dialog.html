@@ -40,7 +40,7 @@
                         <mat-label>nombre</mat-label>
                         <input matInput formControlName="nombre" />
                     </mat-form-field>
-                    
+
                 </div>
                 <mat-form-field class="example-full-width">
                     <mat-label>No. de Telefono</mat-label>
@@ -143,9 +143,19 @@
                         <mat-label>Costo</mat-label>
                         <span matTextPrefix>$&nbsp;</span>
                         <input matInput type="number" formControlName="costo" placeholder="0"
-                            class="example-right-align"/>
+                            class="example-right-align" />
                         <span matTextSuffix>.00</span>
-                         </mat-form-field>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="estado">
+                            <mat-option value="Proceso">Proceso</mat-option>
+                            <mat-option value="Espera">Espera</mat-option>
+                            <mat-option value="Finalizado">Finalizado</mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
                 <div>
                     <button mat-button (click)="cancelar()">Cancelar</button>

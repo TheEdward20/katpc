@@ -27,4 +27,6 @@ export interface Servicio {
   descripciondiagnostico?: string;
   costo?: number;
 
+  estado?: string;
+
 }
