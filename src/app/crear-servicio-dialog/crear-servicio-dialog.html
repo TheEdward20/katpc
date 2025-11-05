@@ -24,7 +24,6 @@
                         <mat-label>Serie</mat-label>
                         <input matInput formControlName="serie" />
                     </mat-form-field>
-
                     <mat-form-field appearance="fill" class="example-full-width">
                         <mat-label>Fecha de Recepción</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="fechaderecepcion"
@@ -32,22 +31,17 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-
-                    <p>{{ fechaFormateada }}</p> <!-- opcional: mostrar texto -->
-
-
+                    <p>{{ fechaFormateada }}</p> 
                     <mat-form-field class="nombre">
                         <mat-label>nombre</mat-label>
                         <input matInput formControlName="nombre" />
                     </mat-form-field>
-
                 </div>
                 <mat-form-field class="example-full-width">
                     <mat-label>No. de Telefono</mat-label>
                     <input matInput formControlName="telefono" />
                     <mat-icon matSuffix>phone</mat-icon>
                 </mat-form-field>
-
                 <div>
                     <button mat-button (click)="cancelar()">Cancelar</button>
                     <button mat-button matStepperNext>Siguiente</button>
@@ -55,7 +49,6 @@
             </form>
         </mat-step>
         <mat-step [stepControl]="form">
-
             <form [formGroup]="form">
                 <ng-template matStepLabel>Funcionamiento General del equipo</ng-template>
                 <h3>Funcionamiento a la recepcion</h3>
@@ -101,11 +94,9 @@
                     </mat-checkbox>
                 </div>
                 <div>
-
                     <h3>Observaciones</h3>
                 </div>
                 <div class="form-grid">
-
                     <mat-form-field class="example-full-width full-row">
                         <mat-label>Observaciones</mat-label>
                         <textarea matInput formControlName="observaciones"></textarea>
@@ -125,14 +116,11 @@
             </form>
         </mat-step>
         <mat-step [stepControl]="form">
-
             <form [formGroup]="form">
                 <div>
-
                     <ng-template matStepLabel>Diagnostico</ng-template>
                 </div>
                 <div class="form-grid">
-
                     <mat-form-field class="example-full-width">
                         <mat-label>Diagnostico y trabajo a realizar:</mat-label>
                         <textarea matInput formControlName="descripciondiagnostico"></textarea>
@@ -151,8 +139,10 @@
                     <mat-form-field class="example-full-width">
                         <mat-label>Estado</mat-label>
                         <mat-select formControlName="estado">
-                            <mat-option value="Proceso">Proceso</mat-option>
-                            <mat-option value="Espera">Espera</mat-option>
+                            <mat-option value="">Selecciona</mat-option>
+                            <mat-option value="Abierto">Abierto</mat-option>
+                            <mat-option value="Requiere atención o autorización">Requiere atención o autorización</mat-option>
+                            <mat-option value="Piezas solicitada">Piezas solicitada</mat-option>
                             <mat-option value="Finalizado">Finalizado</mat-option>
                         </mat-select>
                     </mat-form-field>
