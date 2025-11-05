@@ -34,7 +34,7 @@
     <ng-container matColumnDef="fechaderecepcion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>FECHA</th>
       <td mat-cell *matCellDef="let elemento">
-        {{ elemento.fechaderecepcion | date:'dd/MM/yyyy' }}
+        {{ elemento.fechaderecepcion | date:'EEEE, d \'de\' MMMM \'de\' y':'':'es' }}
       </td>
     </ng-container>
 

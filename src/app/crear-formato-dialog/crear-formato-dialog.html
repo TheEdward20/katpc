@@ -30,7 +30,7 @@
           <mat-form-field class="example-full-width">
             <mat-label>Memoria RAM</mat-label>
             <input matInput formControlName="ram" />
-            
+
           </mat-form-field>
           <mat-form-field class="example-full-width">
             <mat-label>Tipo de Memoria Ram</mat-label>
@@ -297,12 +297,12 @@
       </form>
     </mat-step>
 
-    <!-- Paso 4: Interpretación -->
+    <!-- Paso 3: Interpretación -->
     <mat-step [stepControl]="form">
       <form [formGroup]="form">
         <ng-template matStepLabel>Interpretación</ng-template>
         <div class="form-grid">
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="grado">
             <mat-label>Grado</mat-label>
             <mat-select formControlName="grado" (selectionChange)="onGradoChange($event.value)">
               <mat-option value="">None</mat-option>
@@ -315,27 +315,38 @@
               <mat-option value="F">F</mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
+        <div class="form-grid" appearance="fill">
 
-          <mat-form-field class="example-full-width" *ngIf="form.get('grado')?.value">
+          <mat-form-field class="condicion" *ngIf="form.get('grado')?.value">
             <mat-label>Condición física del equipo</mat-label>
             <textarea matInput formControlName="condicionfisica"></textarea>
           </mat-form-field>
 
-          <mat-form-field class="example-full-width">
+        </div>
+        <div class="form-grid" appearance="fill">
+
+          <mat-form-field class="interpretacion">
             <mat-label>Interpretación de los Resultados</mat-label>
             <textarea matInput formControlName="interpretacion"></textarea>
           </mat-form-field>
-          <mat-form-field class="example-full-width">
+        </div>
+        <div appearance="fill">
+          <mat-form-field class="encargado" appearance="fill">
             <mat-label>Encargado de pruebas</mat-label>
             <input matInput formControlName="encargado" />
           </mat-form-field>
-          <mat-form-field appearance="fill" class="example-full-width">
-            <mat-label>Fecha de las pruebas</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fechaprueba">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
+
+
+
         </div>
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Fecha de las pruebas</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="fechaprueba">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
         <div>
           <button mat-button (click)="cancelar()">Cancelar</button>
           <button mat-button matStepperPrevious>Atrás</button>

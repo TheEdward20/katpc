@@ -36,16 +36,17 @@
                     <p>{{ fechaFormateada }}</p> <!-- opcional: mostrar texto -->
 
 
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="nombre">
                         <mat-label>nombre</mat-label>
                         <input matInput formControlName="nombre" />
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
-                        <mat-label>No. de Telefono</mat-label>
-                        <input matInput formControlName="telefono" />
-                    </mat-form-field>
-
+                    
                 </div>
+                <mat-form-field class="example-full-width">
+                    <mat-label>No. de Telefono</mat-label>
+                    <input matInput formControlName="telefono" />
+                    <mat-icon matSuffix>phone</mat-icon>
+                </mat-form-field>
 
                 <div>
                     <button mat-button (click)="cancelar()">Cancelar</button>
@@ -118,6 +119,7 @@
                 </div>
                 <div>
                     <button mat-button (click)="cancelar()">Cancelar</button>
+                    <button mat-button matStepperPrevious>Atrás</button>
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
             </form>
@@ -137,15 +139,13 @@
                     </mat-form-field>
                 </div>
                 <div class="form-grid">
-
-                    <mat-form-field appearance="fill" class="full-width">
+                    <mat-form-field floatLabel="always" appearance="fill">
                         <mat-label>Costo</mat-label>
-                        <input matInput type="number" formControlName="costo" placeholder="Ingrese el costo" step="0.01"
-                            min="0">
-                    </mat-form-field>
-                    <p *ngIf="form.get('costo')?.value">
-                        Total: {{ form.get('costo')?.value | currency:'MXN' }}
-                    </p>
+                        <span matTextPrefix>$&nbsp;</span>
+                        <input matInput type="number" formControlName="costo" placeholder="0"
+                            class="example-right-align"/>
+                        <span matTextSuffix>.00</span>
+                         </mat-form-field>
                 </div>
                 <div>
                     <button mat-button (click)="cancelar()">Cancelar</button>

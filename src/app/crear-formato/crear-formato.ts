@@ -690,7 +690,7 @@ export class CrearFormato implements OnInit, AfterViewInit  {
         2: { cellWidth: 25.5 }, // sin color fijo aquí
       },
       tableWidth: 'wrap',
-      // 🎨 Colorear dinámicamente la celda
+      // Colorear dinámicamente la celda
       didParseCell: function (data) {
         if (data.section === 'body' && data.column.index === 2) {
           const valor = Number(equipo.videojuego ?? 0);

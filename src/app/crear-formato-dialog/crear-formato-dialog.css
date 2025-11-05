@@ -42,3 +42,12 @@ td {
 .input-small {
   width: 150px;  /* o el tamaño que quieras */
 }
+.grado {
+  width: 100px;
+}
+.condicion{
+  height: 180px;
+}
+.encargado{
+  width: 350px;
+}

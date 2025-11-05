@@ -58,7 +58,11 @@ export class CrearServicioDialog {
     // Formato: martes, 28 de octubre de 2025
     return this.datePipe.transform(fecha, "EEEE, d 'de' MMMM 'de' y", 'es-MX')!;
   }
-  cancelar() {}
+  cancelar() {
+    this.loading = true;
+    this.form.reset();
+    this.dialogRef.close();
+  }
 
   guardarServicio() {
     if (this.form.valid) {
