@@ -26,6 +26,7 @@ constructor(
     if (this.obsForm.valid) {
       // Envía los datos al componente padre
       this.dialogRef.close(this.obsForm.value);
+      
     }
   }
 }

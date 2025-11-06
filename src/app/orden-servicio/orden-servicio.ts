@@ -83,10 +83,22 @@ export class OrdenServicio implements OnInit, AfterViewInit {
   }
 
   guardarCambios(elemento: any) {
-    // Aquí haces tu llamada HTTP o servicio para guardar en backend
-    // Ejemplo:
-    // this.miServicio.actualizarObservacionEstatus(elemento.idServicio, elemento).subscribe(...)
-    console.log('Guardando cambios:', elemento);
+    const url = `https://www.katpc.somee.com/api/KatPCServiciosMaster/${elemento.idServicio}`;
+
+  // Solo toma los campos que vas a actualizar
+  const datosActualizados = {
+    observaciones: elemento.observaciones,
+    estado: elemento.estado
+  };
+
+  this.http.put(url, { ...elemento, ...datosActualizados }).subscribe({
+    next: (response) => {
+      //console.log('✅ Cambios guardados correctamente:', response);
+    },
+    error: (error) => {
+      //console.error('❌ Error al guardar cambios:', error);
+    }
+  });
   }
 
   eliminarEquipo(id: number) {

@@ -159,6 +159,7 @@ export class CrearServicioDialog {
         estado: result.estado
       });
       // puedes llamar guardarServicio() aquí si deseas guardarlo al cerrar
+      this.guardarServicio();
     }
   });
 }
