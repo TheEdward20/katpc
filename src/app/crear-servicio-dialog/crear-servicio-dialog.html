@@ -25,15 +25,6 @@
                         <mat-label>Serie</mat-label>
                         <input matInput formControlName="serie" />
                     </mat-form-field>
-                    <mat-form-field appearance="fill" class="example-full-width">
-                        <mat-label>Fecha de Recepción</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="fechaderecepcion"
-                            [value]="fechaFormateada" readonly />
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-                    <p>{{ fechaFormateada }}</p>
-
                     <mat-form-field class=" nombre">
                         <mat-label>nombre</mat-label>
                         <input matInput formControlName="nombre" />
@@ -88,13 +79,13 @@
                         Webcam
                     </mat-checkbox>
                 </div>
-                 <div>
+                <div>
                     <button mat-button (click)="cancelar()">Cancelar</button>
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
                 <mat-step [stepControl]="form">
                     <form [formGroup]="form">
-                         <ng-template matStepLabel>Bitácora</ng-template>
+                        <ng-template matStepLabel>Bitácora</ng-template>
                         <div>
                             <h3>Observaciones</h3>
                         </div>
@@ -105,12 +96,20 @@
                                 <textarea matInput formControlName="observaciones"></textarea>
                             </mat-form-field>
                         </div>
+
                         <div class="form-grid">
+                            <mat-form-field appearance="fill" class="example-full-width">
+                                <mat-label>Fecha de Recepción</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="fechaderecepcion">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
                             <mat-form-field class="example-full-width">
                                 <mat-label>Password</mat-label>
                                 <input matInput formControlName="pass" />
                             </mat-form-field>
                         </div>
+
                         <div class="form-grid">
                             <mat-form-field floatLabel="always" appearance="fill">
                                 <mat-label>Costo</mat-label>
@@ -136,7 +135,7 @@
                         </div>
                         <div>
                             <button mat-button (click)="cancelar()">Cancelar</button>
-                             <button mat-button matStepperPrevious>Atrás</button>
+                            <button mat-button matStepperPrevious>Atrás</button>
                             <button mat-raised-button color="primary" (click)="guardarServicio()"
                                 [disabled]="form.invalid || loading">
                                 Guardar
