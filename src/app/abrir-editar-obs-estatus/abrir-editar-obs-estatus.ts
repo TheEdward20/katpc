@@ -18,8 +18,7 @@ constructor(
     // Inicializamos el formulario con los valores recibidos
     this.obsForm = this.fb.group({
       observaciones: [data?.observaciones || '', Validators.required],
-      estado: [data?.estado || '', Validators.required],
-      fechaderecepcion: [data?.fechaderecepcion || '']
+      estado: [data?.estado || '', Validators.required]
     });
   }
 
