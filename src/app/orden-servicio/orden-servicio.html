@@ -36,7 +36,7 @@
       <td mat-cell *matCellDef="let elemento">{{ elemento.observaciones }}</td>
     </ng-container>
     <ng-container matColumnDef="estado">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Estatus</th>
       <td mat-cell *matCellDef="let elemento">
         <span [ngClass]="{
         'estado-abierto': elemento.estado === 'Abierto',

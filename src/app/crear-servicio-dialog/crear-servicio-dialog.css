@@ -26,9 +26,7 @@ textarea[matInput] {
   max-height: 120px;
   resize: vertical;
 }
-.nombre{
-  width: 290px;
-}
+
 td {
   padding-right: 8px;
 }

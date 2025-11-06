@@ -653,52 +653,11 @@ export class OrdenServicio implements OnInit, AfterViewInit {
     doc.text(`${textoEtiqueta12} ${valor12 === 1 ? '' : ''}`, 90, posY12 + 31, { align: 'center' });
 
     //------------------------------------------------------------------------------------------------------
-
-    // Dibujar fondo negro para el título
-    const pageWidth15 = 118;
-    const titleText15 = 'Descripción';
-    const rectWidth15 = 90; // ancho del fondo igual a la primera tabla
-    const rectHeight15 = 8;
-
-    doc.setFillColor(0, 0, 0);
-    doc.rect((pageWidth15 - rectWidth15) / 2, lastY + 110, rectWidth15, rectHeight15, 'F');
-
-    // Escribir texto centrado sobre el fondo
-    doc.setTextColor(225, 225, 225);
-    doc.text(titleText15, pageWidth15 / 2, lastY + 115, { align: 'center' });
-
-    const rows6 = [[servicio.observaciones ?? '']];
-
-    // ── Primera tabla ──
-    autoTable(doc, {
-      body: rows6,
-      theme: 'plain',
-      startY: 163.2,
-      styles: {
-        fontSize: 10,
-        halign: 'center',
-        lineColor: [0, 0, 0], // borde negro también en el encabezado
-        lineWidth: 0.3,
-        cellPadding: { top: 2, bottom: 2 }, // margen vertical
-        overflow: 'linebreak',
-      },
-      headStyles: {
-        fontSize: 9,
-        textColor: [0, 0, 0],
-        halign: 'center',
-      },
-      columnStyles: {
-        0: { cellWidth: 90 },
-      },
-      tableWidth: 'wrap',
-      margin: { left: 14 },
-    });
-
-    const rows13 = [['Password: ', servicio.pass ?? '']];
+      const rows13 = [['Password: ', servicio.pass ?? '']];
     autoTable(doc, {
       body: rows13,
       theme: 'grid',
-      startY: 180,
+      startY: 157,
       styles: {
         font: 'helvetica', // fuente
         fontStyle: 'bold', // negrita
@@ -722,7 +681,7 @@ export class OrdenServicio implements OnInit, AfterViewInit {
 
     // Dibujar fondo negro para el título
     const pageWidth16 = 118;
-    const titleText16 = 'Diagnostico y trabajo a realizar';
+    const titleText16 = 'Observacion';
     const rectWidth16 = 90; // ancho del fondo igual a la primera tabla
     const rectHeight16 = 8;
     const offsetX = 147;
@@ -733,7 +692,7 @@ export class OrdenServicio implements OnInit, AfterViewInit {
     doc.setTextColor(225, 225, 225);
     doc.text(titleText16, pageWidth16 / 2 + offsetX, lastY + 58, { align: 'center' });
 
-    const rows7 = [[servicio.descripciondiagnostico ?? '']];
+    const rows7 = [[servicio.observaciones ?? '']];
 
     // ── Primera tabla ──
     autoTable(doc, {

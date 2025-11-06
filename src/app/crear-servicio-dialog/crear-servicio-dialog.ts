@@ -44,7 +44,7 @@ export class CrearServicioDialog {
       webcam: [data?.webcam],
       observaciones: [data?.observaciones],
       pass: [data?.pass],
-      descripciondiagnostico: [data?.descripciondiagnostico],
+     // descripciondiagnostico: [data?.descripciondiagnostico],
       costo: [data?.costo],
       estado: [data?.estado]
     });
@@ -95,7 +95,7 @@ export class CrearServicioDialog {
         observaciones: this.form.value.observaciones || '',
         pass: this.form.value.pass || '',
 
-        descripciondiagnostico: this.form.value.descripciondiagnostico || '',
+       // descripciondiagnostico: this.form.value.descripciondiagnostico || '',
         costo: Number(this.form.value.costo) || 0,
 
         estado: this.form.value.estado ?? '',

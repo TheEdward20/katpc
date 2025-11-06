@@ -1,12 +1,13 @@
-<h1 mat-dialog-title>{{ data.idServicio === 0 ? 'Nuevo Equipo' : 'Editar Equipo' }}</h1>
-
+<h1 mat-dialog-title>{{ data.idServicio === 0 ? 'Nuevo Orden de Servicio' : 'Editar Orden de Servicio' }}</h1>
 <mat-dialog-content>
     <mat-horizontal-stepper [linear]="true" #stepper>
-
         <!-- Paso 1: Datos del Servicios -->
         <mat-step [stepControl]="form">
             <form [formGroup]="form">
-                <ng-template matStepLabel>Registro de Entrega y Recepcion de equipo de computo</ng-template>
+                <ng-template matStepLabel>Registro de Entrega y Recepcion de equipo</ng-template>
+                <div>
+                    <h3>Datos</h3>
+                </div>
                 <div class="form-grid">
                     <mat-form-field class="example-full-width">
                         <mat-label>Folio</mat-label>
@@ -31,29 +32,23 @@
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
-                    <p>{{ fechaFormateada }}</p> 
-                    <mat-form-field class="nombre">
+                    <p>{{ fechaFormateada }}</p>
+
+                    <mat-form-field class=" nombre">
                         <mat-label>nombre</mat-label>
                         <input matInput formControlName="nombre" />
                     </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>No. de Telefono</mat-label>
+                        <input matInput formControlName="telefono" />
+                        <mat-icon matSuffix>phone</mat-icon>
+                    </mat-form-field>
                 </div>
-                <mat-form-field class="example-full-width">
-                    <mat-label>No. de Telefono</mat-label>
-                    <input matInput formControlName="telefono" />
-                    <mat-icon matSuffix>phone</mat-icon>
-                </mat-form-field>
                 <div>
-                    <button mat-button (click)="cancelar()">Cancelar</button>
-                    <button mat-button matStepperNext>Siguiente</button>
+                    <h3>Funciones</h3>
                 </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="form">
-            <form [formGroup]="form">
-                <ng-template matStepLabel>Funcionamiento General del equipo</ng-template>
-                <h3>Funcionamiento a la recepcion</h3>
-                <!--Observaciones-->
                 <div class="form-grid">
+
                     <mat-checkbox [checked]="form.value.enciende"
                         (change)="form.patchValue({ enciende: $event.checked })">
                         Enciende
@@ -93,73 +88,66 @@
                         Webcam
                     </mat-checkbox>
                 </div>
-                <div>
-                    <h3>Observaciones</h3>
-                </div>
-                <div class="form-grid">
-                    <mat-form-field class="example-full-width full-row">
-                        <mat-label>Observaciones</mat-label>
-                        <textarea matInput formControlName="observaciones"></textarea>
-                    </mat-form-field>
-                </div>
-                <div class="form-grid">
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Password</mat-label>
-                        <input matInput formControlName="pass" />
-                    </mat-form-field>
-                </div>
-                <div>
+                 <div>
                     <button mat-button (click)="cancelar()">Cancelar</button>
-                    <button mat-button matStepperPrevious>Atrás</button>
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
-            </form>
-        </mat-step>
-        <mat-step [stepControl]="form">
-            <form [formGroup]="form">
-                <div>
-                    <ng-template matStepLabel>Diagnostico</ng-template>
-                </div>
-                <div class="form-grid">
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Diagnostico y trabajo a realizar:</mat-label>
-                        <textarea matInput formControlName="descripciondiagnostico"></textarea>
-                    </mat-form-field>
-                </div>
-                <div class="form-grid">
-                    <mat-form-field floatLabel="always" appearance="fill">
-                        <mat-label>Costo</mat-label>
-                        <span matTextPrefix>$&nbsp;</span>
-                        <input matInput type="number" formControlName="costo" placeholder="0"
-                            class="example-right-align" />
-                        <span matTextSuffix>.00</span>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field class="example-full-width">
-                        <mat-label>Estado</mat-label>
-                        <mat-select formControlName="estado">
-                            <mat-option value="">Selecciona</mat-option>
-                            <mat-option value="Abierto">Abierto</mat-option>
-                            <mat-option value="Requiere atención o autorización">Requiere atención o autorización</mat-option>
-                            <mat-option value="Piezas solicitada">Piezas solicitada</mat-option>
-                            <mat-option value="Finalizado">Finalizado</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <button mat-button (click)="cancelar()">Cancelar</button>
-                    <button mat-button matStepperPrevious>Atrás</button>
-                    <button mat-raised-button color="primary" (click)="guardarServicio()"
-                        [disabled]="form.invalid || loading">
-                        Guardar
-                        <div class="overlay" *ngIf="loading">
-                            <mat-spinner diameter="80" color="accent"></mat-spinner>
+                <mat-step [stepControl]="form">
+                    <form [formGroup]="form">
+                         <ng-template matStepLabel>Bitácora</ng-template>
+                        <div>
+                            <h3>Observaciones</h3>
                         </div>
-                    </button>
-                </div>
+
+                        <div class="form-grid">
+                            <mat-form-field class="example-full-width full-row">
+                                <mat-label>Observaciones</mat-label>
+                                <textarea matInput formControlName="observaciones"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-grid">
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Password</mat-label>
+                                <input matInput formControlName="pass" />
+                            </mat-form-field>
+                        </div>
+                        <div class="form-grid">
+                            <mat-form-field floatLabel="always" appearance="fill">
+                                <mat-label>Costo</mat-label>
+                                <span matTextPrefix>$&nbsp;</span>
+                                <input matInput type="number" formControlName="costo" placeholder="0"
+                                    class="example-right-align" />
+                                <span matTextSuffix>.00</span>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Estatus</mat-label>
+                                <mat-select formControlName="estado">
+                                    <mat-option disabled="">Selecciona</mat-option>
+                                    <mat-option value="Abierto">Abierto</mat-option>
+                                    <mat-option value="Requiere atención o autorización">Requiere atención o
+                                        autorización</mat-option>
+                                    <mat-option value="Piezas solicitada">Piezas solicitada</mat-option>
+                                    <mat-option value="Finalizado">Finalizado</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+
+                        </div>
+                        <div>
+                            <button mat-button (click)="cancelar()">Cancelar</button>
+                             <button mat-button matStepperPrevious>Atrás</button>
+                            <button mat-raised-button color="primary" (click)="guardarServicio()"
+                                [disabled]="form.invalid || loading">
+                                Guardar
+                                <div class="overlay" *ngIf="loading">
+                                    <mat-spinner diameter="80" color="accent"></mat-spinner>
+                                </div>
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
             </form>
         </mat-step>
-
     </mat-horizontal-stepper>
 </mat-dialog-content>

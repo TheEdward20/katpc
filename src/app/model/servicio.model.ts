@@ -24,7 +24,7 @@ export interface Servicio {
   observaciones?: string;
   pass?: string;
 
-  descripciondiagnostico?: string;
+  //descripciondiagnostico?: string;
   costo?: number;
 
   estado?: string;
