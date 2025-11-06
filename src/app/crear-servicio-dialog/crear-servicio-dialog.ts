@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Servicio } from '../model/servicio.model';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { AbrirEditarObsEstatus } from '../abrir-editar-obs-estatus/abrir-editar-obs-estatus';
 
 @Component({
   selector: 'app-crear-servicio-dialog',
@@ -21,7 +22,8 @@ export class CrearServicioDialog {
     private dialogRef: MatDialogRef<CrearServicioDialog>,
     @Inject(MAT_DIALOG_DATA) public data: Servicio,
     private http: HttpClient, // <-- inyecta HttpClient
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private dialog: MatDialog
   ) {
     this.form = this.fb.group({
       idServicio: [data?.idServicio],
@@ -44,7 +46,7 @@ export class CrearServicioDialog {
       webcam: [data?.webcam],
       observaciones: [data?.observaciones],
       pass: [data?.pass],
-     // descripciondiagnostico: [data?.descripciondiagnostico],
+      diagnosticos: [data?.diagnosticos],
       costo: [data?.costo],
       estado: [data?.estado]
     });
@@ -95,7 +97,7 @@ export class CrearServicioDialog {
         observaciones: this.form.value.observaciones || '',
         pass: this.form.value.pass || '',
 
-       // descripciondiagnostico: this.form.value.descripciondiagnostico || '',
+        diagnosticos: this.form.value.diagnosticos || '',
         costo: Number(this.form.value.costo) || 0,
 
         estado: this.form.value.estado ?? '',
@@ -140,4 +142,24 @@ export class CrearServicioDialog {
       }
     }
   }
+
+  abrirEditarObsEstatus() {
+  const dialogRef = this.dialog.open(AbrirEditarObsEstatus, {
+    width: '500px',
+    data: {
+      observaciones: this.form.value.observaciones,
+      estado: this.form.value.estado
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.form.patchValue({
+        observaciones: result.observaciones,
+        estado: result.estado
+      });
+      // puedes llamar guardarServicio() aquí si deseas guardarlo al cerrar
+    }
+  });
+}
 }

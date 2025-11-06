@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { AbrirEditarObsEstatus } from '../abrir-editar-obs-estatus/abrir-editar-obs-estatus';
 @Component({
   selector: 'app-orden-servicio',
   standalone: false,
@@ -59,8 +60,33 @@ export class OrdenServicio implements OnInit, AfterViewInit {
       }
     });
   }
-  editarEquipo(s: Servicio) {
-    this.openDialog(s);
+  editarEquipo(elemento: any) {
+     const dialogRef = this.dialog.open(AbrirEditarObsEstatus, {
+      width: '500px',
+      data: {
+        observaciones: elemento.observaciones,
+        estado: elemento.estado
+      }
+    });
+
+    // Cuando el modal se cierra
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // ✅ Actualiza los valores en la tabla o en la BD
+        elemento.observaciones = result.observaciones;
+        elemento.estado = result.estado;
+
+        // Si quieres guardar automáticamente en la base de datos:
+        this.guardarCambios(elemento);
+      }
+    });
+  }
+
+  guardarCambios(elemento: any) {
+    // Aquí haces tu llamada HTTP o servicio para guardar en backend
+    // Ejemplo:
+    // this.miServicio.actualizarObservacionEstatus(elemento.idServicio, elemento).subscribe(...)
+    console.log('Guardando cambios:', elemento);
   }
 
   eliminarEquipo(id: number) {
@@ -653,11 +679,51 @@ export class OrdenServicio implements OnInit, AfterViewInit {
     doc.text(`${textoEtiqueta12} ${valor12 === 1 ? '' : ''}`, 90, posY12 + 31, { align: 'center' });
 
     //------------------------------------------------------------------------------------------------------
+     // Dibujar fondo negro para el título
+    const pageWidth16 = 118;
+    const titleText16 = 'Observacion';
+    const rectWidth16 = 90; // ancho del fondo igual a la primera tabla
+    const rectHeight16 = 8;
+    const offsetX = 147;
+    doc.setFillColor(0, 0, 0);
+    doc.rect((pageWidth16 - rectWidth16) / 2 + offsetX, lastY + 53, rectWidth16, rectHeight16, 'F');
+
+    // Escribir texto centrado sobre el fondo
+    doc.setTextColor(225, 225, 225);
+    doc.text(titleText16, pageWidth16 / 2 + offsetX, lastY + 58, { align: 'center' });
+
+    const rows7 = [[servicio.observaciones ?? '']];
+
+    // ── Primera tabla ──
+    autoTable(doc, {
+      body: rows7,
+      theme: 'plain',
+      startY: 157,
+      styles: {
+        fontSize: 10,
+        halign: 'center',
+        lineColor: [0, 0, 0], // borde negro también en el encabezado
+        lineWidth: 0.3,
+        cellPadding: { top: 2, bottom: 2 }, // margen vertical
+        overflow: 'linebreak',
+      },
+      headStyles: {
+        fontSize: 9,
+        textColor: [0, 0, 0],
+        halign: 'center',
+      },
+      columnStyles: {
+        0: { cellWidth: 90 },
+      },
+      tableWidth: 'wrap',
+      //margin: { left: 161.1 },
+    });
+
       const rows13 = [['Password: ', servicio.pass ?? '']];
     autoTable(doc, {
       body: rows13,
       theme: 'grid',
-      startY: 157,
+      startY: 180,
       styles: {
         font: 'helvetica', // fuente
         fontStyle: 'bold', // negrita
@@ -680,23 +746,23 @@ export class OrdenServicio implements OnInit, AfterViewInit {
     });
 
     // Dibujar fondo negro para el título
-    const pageWidth16 = 118;
-    const titleText16 = 'Observacion';
-    const rectWidth16 = 90; // ancho del fondo igual a la primera tabla
-    const rectHeight16 = 8;
-    const offsetX = 147;
+    const pageWidth17 = 118;
+    const titleText17 = 'Diagnosticos';
+    const rectWidth17 = 90; // ancho del fondo igual a la primera tabla
+    const rectHeight17 = 8;
+    const offsetX1 = 147;
     doc.setFillColor(0, 0, 0);
-    doc.rect((pageWidth16 - rectWidth16) / 2 + offsetX, lastY + 53, rectWidth16, rectHeight16, 'F');
+    doc.rect((pageWidth17 - rectWidth17) / 2 + offsetX1, lastY + 53, rectWidth17, rectHeight17, 'F');
 
     // Escribir texto centrado sobre el fondo
     doc.setTextColor(225, 225, 225);
-    doc.text(titleText16, pageWidth16 / 2 + offsetX, lastY + 58, { align: 'center' });
+    doc.text(titleText17, pageWidth17 / 2 + offsetX1, lastY + 58, { align: 'center' });
 
-    const rows7 = [[servicio.observaciones ?? '']];
+    const rows8 = [[servicio.diagnosticos ?? '']];
 
     // ── Primera tabla ──
     autoTable(doc, {
-      body: rows7,
+      body: rows8,
       theme: 'plain',
       startY: 105,
       styles: {

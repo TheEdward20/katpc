@@ -42,6 +42,7 @@ import { Confirmdialog } from './confirmdialog/confirmdialog';
 import { Login } from './login/login';
 import { Mensaje } from './mensaje/mensaje';
 import { CrearServicioDialog } from './crear-servicio-dialog/crear-servicio-dialog';
+import { AbrirEditarObsEstatus } from './abrir-editar-obs-estatus/abrir-editar-obs-estatus';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { CrearServicioDialog } from './crear-servicio-dialog/crear-servicio-dial
     Confirmdialog,
     Login,
     Mensaje,
-    CrearServicioDialog
+    CrearServicioDialog,
+    AbrirEditarObsEstatus
   ],
   imports: [
     BrowserModule,

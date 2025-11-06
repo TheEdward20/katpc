@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Editar Observaciones y Estatus</h1>
+<mat-dialog-content>
+  <form [formGroup]="obsForm">
+    <div class="form-grid">
+      <mat-form-field class="example-full-width">
+        <mat-label>Observaciones</mat-label>
+        <textarea matInput formControlName="observaciones"></textarea>
+      </mat-form-field>
+     </div>
+    <div class="form-grid">
+      <mat-form-field class="example-full-width">
+        <mat-label>Estatus</mat-label>
+        <mat-select formControlName="estado">
+          <mat-option disabled>Selecciona</mat-option>
+          <mat-option value="Abierto">Abierto</mat-option>
+          <mat-option value="Requiere atención o autorización">Requiere atención o autorización</mat-option>
+          <mat-option value="Piezas solicitada">Piezas solicitada</mat-option>
+          <mat-option value="Finalizado">Finalizado</mat-option>
+        </mat-select>
+      </mat-form-field>
+   
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Fecha de Recepción</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaderecepcion">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="guardarObsEstatus()">Guardar</button>
+</mat-dialog-actions>
